@@ -20,25 +20,21 @@ package se.GGJgame
 			
 			if (FlxG.keys.UP)
 			{
-				//ourchar.y -= ourchar.yStep;
 				facing = UP;
 				y -= 1;
 			}
 			if (FlxG.keys.DOWN)
 			{
-				//ourchar.y += ourchar.yStep;
 				facing = DOWN;
 				y += 1;
 			}
 			if (FlxG.keys.LEFT)
 			{
-				//ourchar.x -= ourchar.xStep;
 				facing = LEFT;
 				x -= 1;
 			}
 			if (FlxG.keys.RIGHT)
 			{
-				//ourchar.x -= ourchar.yStep;
 				facing = RIGHT;
 				x += 1;				
 			}
