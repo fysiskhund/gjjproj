@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
-	width="600"
-	height="800"
+	width="800"
+	height="500"
 	frameRate="250"
 	creationComplete="creationComplete()"
 	enterFrame="enterFrame(event)">

@@ -6,7 +6,7 @@ package se.GGJgame
 	{
 		public function GameSetup()
 		{
-			super( 400, 300, MenuState, 2 );
+			super( 400, 250, MenuState, 2 );
 			//help( "Jump", "Shoot", "Nothing" );
 		}
 		
