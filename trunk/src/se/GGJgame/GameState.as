@@ -15,11 +15,13 @@ package se.GGJgame
 			super();			
 			_player1 = new Player();
 			FlxG.follow( _player1 );
+			this.add( _player1 );
 		}
 		
 		override public function update():void 
 		{
 			super.update();
+			_player1.update();
 		}
 		
 	}

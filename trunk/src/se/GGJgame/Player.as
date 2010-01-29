@@ -5,14 +5,17 @@ package se.GGJgame
 
 	public class Player extends FlxSprite
 	{
-		//[Embed(source='../../data/Player.png')] private var ImgPlayer:Class;
+		[Embed( source='../../../resources/monkey.png' )] private var ImgPlayer:Class;
 		private var _move_speed:int = 400; // just a tweak
 		
-		public function Player(X:int=0, Y:int=0, SimpleGraphic:Class=null)
+		public function Player( X:int=0, Y:int=0, SimpleGraphic:Class=null )
 		{
-			super(X, Y, SimpleGraphic);
+			super( X, Y, SimpleGraphic );
+			//super( X, Y, ImgPlayer );
+			
 			//load basic sprite image
-			//loadGraphic(ImgPlayer, true/* animated */, true, 16, 16);
+			loadGraphic( ImgPlayer, true/* animated */, true, 16, 16 );
+			addAnimation( "normal", [0] ); 
 		}
 		
 		override public function update():void 
@@ -22,21 +25,25 @@ package se.GGJgame
 			{
 				facing = UP;
 				y -= 1;
+				this.play( "normal" );
 			}
 			if (FlxG.keys.DOWN)
 			{
 				facing = DOWN;
 				y += 1;
+				this.play( "normal" );
 			}
 			if (FlxG.keys.LEFT)
 			{
 				facing = LEFT;
 				x -= 1;
+				this.play( "normal" );
 			}
 			if (FlxG.keys.RIGHT)
 			{
 				facing = RIGHT;
-				x += 1;				
+				x += 1;			
+				this.play( "normal" );	
 			}
 			super.update();	
 		}
