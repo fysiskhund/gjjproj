@@ -19,11 +19,15 @@ package se.GGJgame
 			type = hatType;
 			
 		}
+		override public function setType(i:int):void
+		{
+			type = i;
 		
+		}
 		override public function update():void 
 		{	
 			super.update();
-
+			this.specificFrame(type);
 		}
 		
 	}
