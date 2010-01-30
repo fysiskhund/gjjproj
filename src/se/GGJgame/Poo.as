@@ -9,7 +9,9 @@ package se.GGJgame
 		[Embed(source="../../../resources/poo.png")] private var ImgPoo:Class;
 		var iDirX:int;
 		var iDirY:int;
-		var ttl:int;
+		var ttl:Number;
+		private var _move_speed:int = 120;
+		
 		public function Poo(X:int=0, Y:int=0, SimpleGraphic:Class=null)
 		{
 			super(X, Y, ImgPoo);
@@ -23,20 +25,23 @@ package se.GGJgame
    			iDirY = dirY;
    			x = posX;
    			y = posY+6;
-   			ttl = 20;
+   			ttl = 0.5;
 		}
 		override public function update():void 
 		{
 			
 			if (ttl > 0)
 			{
-				x += iDirX;
-				y += iDirY;
-				ttl--;
-			} else
-			{
-				super.update();
+				velocity.x = iDirX;
+				velocity.y = iDirY;
+				velocity.normalize(_move_speed);
+				ttl -= FlxG.elapsed;
+				
+			} else {
+				velocity.x = 0;
+				velocity.y = 0;
 			}
+			super.update();
 			
 			
 		}
