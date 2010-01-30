@@ -2,13 +2,13 @@ package se.GGJgame
 {
 	
 	import org.flixel.*;
-	import org.flixel.data.FlxAnim;
 	
 
 	public class GameState extends FlxState
 	{
 		public var player1:Player;
 		public var npcs:Array;
+		public var items:Array;
 		public var text:FlxText;
 		public var lives:int;
 		private var _map:FlxTilemap;
@@ -36,9 +36,14 @@ package se.GGJgame
 			FlxState.bgColor = 0xff107100;
 			player1 = new Player();
 			npcs = new Array();
+			items = new Array();
 			_lyrStage = new FlxLayer;
 	        _lyrSprites = new FlxLayer;
     	    _lyrHUD = new FlxLayer;
+    	    
+    	    this.text = new FlxText( 0, 0, FlxG.width, "ABC" );
+			text.setFormat( null, 16, 0xFFFFFFFF, "center" );
+			_lyrHUD.add(text);
 			
 			_map = new FlxTilemap();
 			_map.loadMap( new mapData, mapTiles);
@@ -48,9 +53,29 @@ package se.GGJgame
 			_map.y = 0; 
 			_lyrStage.add( _map );
 			
+			
+			for ( x=0; x < _map.widthInTiles; x++) 
+			{
+				for ( y=0; y < _map.heightInTiles; y++) 
+				{
+					var nr:int = _map.getTile(x,y);
+					if(nr == 10)
+					{
+						var it:Item = new Banana(x*16,y*16)
+						_lyrSprites.add(it);
+						items.push(it);
+					}
+					else if(nr >=11 && nr <= 14) {
+						var it:Item = new Hat(x*16,y*16,null, nr-10)
+						_lyrSprites.add(it);
+						items.push(it);
+					}
+				}
+			}
+			
 			lives = 3;
 			
-			npcs.push(new Npc(40,10,null,2));
+			npcs.push(new Npc(40,40,null,2));
 			for each (var np:Npc in npcs) {
 				_lyrSprites.add(np);
 				_lyrSprites.add(np._hatSprite);
@@ -59,9 +84,7 @@ package se.GGJgame
 			player1 = new Player();
 			_lyrSprites.add( player1 );
 
-			this.text = new FlxText( 0, 0, FlxG.width, "ABC" );
-			text.setFormat( null, 16, 0xFFFFFFFF, "center" );
-			_lyrHUD.add(text);
+			
 
 			//camera tweaks 
 			_poo_p1 = new Poo();
@@ -85,8 +108,8 @@ package se.GGJgame
 			for each (var np:Npc in npcs) {
 				np.restart();
 			}
-			player1.x = 100;
-			player1.y = 100;
+			player1.x = 120;
+			player1.y = 120;
 			if(lives == 0)
 				FlxG.switchState(GameOverState);
 		}
@@ -94,11 +117,14 @@ package se.GGJgame
 		override public function update():void 
 		{
 			
-			text.text = lives.toString();
+			//text.text = lives.toString();
 			
 			player1.update();
 			_map.collide( player1 );
 			_map.collideArray(npcs);
+			FlxG.overlapArray(items, player1, player1.pickUp);
+			
+			this.text.text = player1.bananas.toString();
 
 
 			
@@ -114,6 +140,9 @@ package se.GGJgame
 			
 			for each (var np:Npc in npcs) {
 				np.update();
+			}
+			for each (var it:Item in items) {
+				it.update();
 			}
 		}
 		

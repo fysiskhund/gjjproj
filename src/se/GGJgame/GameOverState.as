@@ -19,7 +19,7 @@ package se.GGJgame
 			this.add( text );
 			
 			var text2:FlxText = new FlxText( 0, (FlxG.height / 2), FlxG.width, "Press [Enter] to play again." );
-			text2.setFormat( null, 10, 0xFFFFFFFF, "center" );
+			text2.setFormat( null, 8, 0xFFFFFFFF, "center" );
 			this.add( text2 );
 			
 		}

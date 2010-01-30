@@ -1,9 +1,6 @@
 package se.GGJgame
 {
-	import flash.display.Sprite;
-	
 	import org.flixel.FlxG;
-	import org.flixel.FlxSprite;
 
 	public class Player extends Monkey
 	{
@@ -12,6 +9,8 @@ package se.GGJgame
 		// 
 		public var dirX:int;
 		public var dirY:int;
+		
+		public var bananas:int;
 
 		private var _move_speed:int = 100; // just a tweak
 		
@@ -23,12 +22,34 @@ package se.GGJgame
 			super( X, Y, SimpleGraphic );
 			loadGraphic( ImgPlayer, true/* animated */, true, 14, 12 );
 			//Bounding box tweaks
+			this.currentHat = 0;
 		}
+		
+		public function pickUp(item:Item, p:Player):void
+        {
+        	if(FlxG.keys.CONTROL) {
+        		if(item.visible) {
+	        		
+	        		if(item.type == 0) {
+	        			bananas++;
+	        		}
+	        		else if(item.type >= 1 && item.type <= 4) {
+	        			currentHat = item.type;
+	        			var gs:GameState = (FlxG.state as GameState);
+	        			for each (var it:Item in gs.items) {
+	        				if(it.type > 0)
+	        					it.visible = true;
+	        			}
+	        		}
+	        		item.visible = false;
+        		}
+        		
+        	}
+        	
+        }
 		
 		override public function update():void 
 		{
-			
-			
 			if (FlxG.keys.UP)
 			{
 				facing = UP;
