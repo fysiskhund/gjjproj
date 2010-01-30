@@ -21,6 +21,12 @@ package se.GGJgame
 			
 		}
 		
+		public function setType(i:int):void
+		{
+			type = i;
+		
+		}
+		
 		override public function update():void 
 		{	
 			super.update();

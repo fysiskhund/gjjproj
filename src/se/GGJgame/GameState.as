@@ -85,8 +85,7 @@ package se.GGJgame
 				_lyrSprites.add(np._hatSprite);
 			}
 		
-			player1 = new Player();
-			player1.team = 1;
+			player1 = new Player(120,120);
 			_lyrSprites.add( player1 );
 
 			
@@ -127,15 +126,24 @@ package se.GGJgame
 			player1.update();
 			_map.collide( player1 );
 			_map.collideArray(npcs);
+			_map.collide(_poo_p1);
 			FlxG.overlapArray(items, player1, player1.pickUp);
+			FlxG.overlapArray(npcs, _poo_p1, _poo_p1.hit);
 			
-			this.text.text = player1.bananas.toString();
+			
+			this.text.text = player1.bananas.toString() + " - " + player1.poo.toString();
 
 
 			
 			if (FlxG.keys.SPACE)
 			{
-				_poo_p1.throwPoo(player1.x, player1.y,  player1.dirX, player1.dirY);
+				if(player1.poo > 0)
+				{
+					_poo_p1.visible = true;
+					_poo_p1.throwPoo(player1.x, player1.y,  player1.dirX, player1.dirY);
+					player1.poo--;
+				}
+			
 			}
 			if (FlxG.keys.ONE)
 			{
