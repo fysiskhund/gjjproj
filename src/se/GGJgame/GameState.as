@@ -51,7 +51,7 @@ package se.GGJgame
 			
 			_map = new FlxTilemap();
 			_map.loadMap( new mapData, mapTiles);
-			_map.collideIndex = 20;
+			_map.collideIndex = 30;
 			_map.follow();
 			_map.x = 0;
 			_map.y = 0; 
@@ -74,20 +74,37 @@ package se.GGJgame
 						_lyrSprites.add(it);
 						items.push(it);
 					}
+					else if(nr >=15 && nr <= 18) {
+						var n:Npc = new Npc(x*16,y*16,null,nr-10);
+						_lyrSprites.add(n);
+						npcs.push(n);
+					}
+					else if(nr >= 20 && nr <= 23)
+					{
+						var n:Npc = new Npc(x*16,y*16,null,nr-19);
+						_lyrSprites.add(n);
+						npcs.push(n);
+					}
+					else if(nr >= 24 && nr <= 27)
+					{
+						var n:Npc = new Npc(x*16,y*16,null,nr-23);
+						_lyrSprites.add(n);
+						npcs.push(n);
+					}
 				}
 			}
 			
 			lives = 3;
 			conflicts = new ConflictTable(5);
 			
-			npcs.push(new Npc(20,20,null,2));
-			npcs.push(new Npc(180,180,null,3));
+			//npcs.push(new Npc(20,20,null,2));
+			//npcs.push(new Npc(180,180,null,3));
 			for each (var np:Npc in npcs) {
 				_lyrSprites.add(np);
 				_lyrSprites.add(np._hatSprite);
 			}
 		
-			player1 = new Player(120,120);
+			player1 = new Player(400,750);
 			_lyrSprites.add( player1 );
 
 			
