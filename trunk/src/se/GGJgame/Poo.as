@@ -7,8 +7,8 @@ package se.GGJgame
 	public class Poo extends FlxSprite
 	{
 		[Embed(source="../../../resources/poo.png")] private var ImgPoo:Class;
-		var iDirX:Boolean;
-		var iDirY:Boolean;
+		var iDirX:int;
+		var iDirY:int;
 		var ttl:int;
 		public function Poo(X:int=0, Y:int=0, SimpleGraphic:Class=null)
 		{
@@ -17,7 +17,7 @@ package se.GGJgame
    			//addAnimation("splat",[1], 150, false);
 
 		}
-		public function throwPoo(posX:int, posY:int, dirX:Boolean, dirY:Boolean):void
+		public function throwPoo(posX:int, posY:int, dirX:int, dirY:int):void
 		{
 			iDirX = dirX;
    			iDirY = dirY;
@@ -25,27 +25,18 @@ package se.GGJgame
    			y = posY;
    			ttl = 20;
 		}
-		public function updatePoo():void 
+		override public function update():void 
 		{
 			
 			if (ttl > 0)
 			{
-				if (iDirX)
-				{
-					x += 1;
-				} else
-				{
-					x -= 1;
-				}
-				if (iDirY)
-				{
-					y += 1;
-				} else
-				{
-					y -= 1;
-				}
+				x += iDirX;
+				y += iDirY;
 				ttl--;
-			} 
+			} else
+			{
+				super.update();
+			}
 			
 			
 		}

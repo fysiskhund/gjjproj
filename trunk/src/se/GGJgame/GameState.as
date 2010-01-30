@@ -16,9 +16,10 @@ package se.GGJgame
 			super();			
 			player1 = new Player();
 			_poo_p1 = new Poo();
-			FlxG.follow( _player1 );
-			this.add( _player1 );
+			FlxG.follow( player1 );
+			this.add( player1 );
 			this.add( _poo_p1);
+			this.add( player1._hatSprite);
 		}
 		
 		override public function update():void 
@@ -27,9 +28,13 @@ package se.GGJgame
 			player1.update();
 			if (FlxG.keys.SPACE)
 			{
-				_poo_p1.throwPoo(0, 0, true, true);
+				_poo_p1.throwPoo(player1.x, player1.y,  player1.dirX, player1.dirY);
 			}
-			_poo_p1.updatePoo();
+			if (FlxG.keys.ONE)
+			{
+				player1.currentHat++;
+			}
+			_poo_p1.update();
 		}
 		
 	}
