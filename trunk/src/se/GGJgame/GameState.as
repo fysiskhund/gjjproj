@@ -5,7 +5,7 @@ package se.GGJgame
 
 	public class GameState extends FlxState
 	{
-		private var _player1:Player;
+		public var player1:Player;
 		private var _poo_p1:Poo;
 		
 		//Just preparing for an eventual second player
@@ -14,7 +14,7 @@ package se.GGJgame
 		public function GameState()
 		{
 			super();			
-			_player1 = new Player();
+			player1 = new Player();
 			_poo_p1 = new Poo();
 			FlxG.follow( _player1 );
 			this.add( _player1 );
@@ -24,7 +24,7 @@ package se.GGJgame
 		override public function update():void 
 		{
 			super.update();
-			_player1.update();
+			player1.update();
 			if (FlxG.keys.SPACE)
 			{
 				_poo_p1.throwPoo(0, 0, true, true);
