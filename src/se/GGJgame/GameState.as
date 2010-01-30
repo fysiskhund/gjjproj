@@ -14,6 +14,8 @@ package se.GGJgame
 		private var _map:FlxTilemap;
 		private var _BGmap:FlxTilemap;
 		
+		public var conflicts:ConflictTable;
+		
 		private var _poo_p1:Poo;
 
 		//layers so we can overlap HUD ect.		
@@ -34,7 +36,7 @@ package se.GGJgame
 			super();			
 			
 			FlxState.bgColor = 0xff107100;
-			player1 = new Player();
+			player1 = new Player(250,50);
 			npcs = new Array();
 			items = new Array();
 			_lyrStage = new FlxLayer;
@@ -74,14 +76,17 @@ package se.GGJgame
 			}
 			
 			lives = 3;
+			conflicts = new ConflictTable(5);
 			
-			npcs.push(new Npc(40,40,null,2));
+			npcs.push(new Npc(20,20,null,2));
+			npcs.push(new Npc(180,180,null,3));
 			for each (var np:Npc in npcs) {
 				_lyrSprites.add(np);
 				_lyrSprites.add(np._hatSprite);
 			}
 		
 			player1 = new Player();
+			player1.team = 1;
 			_lyrSprites.add( player1 );
 
 			
@@ -134,7 +139,11 @@ package se.GGJgame
 			}
 			if (FlxG.keys.ONE)
 			{
-				player1.currentHat++;
+				player1.team++;
+			}
+			if (FlxG.keys.TWO)
+			{
+				conflicts.setAtWar(3,2);
 			}
 			_poo_p1.update();
 			

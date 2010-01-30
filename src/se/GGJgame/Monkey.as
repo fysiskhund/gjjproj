@@ -1,9 +1,10 @@
 package se.GGJgame
 {
 
-	import org.flixel.FlxSprite;
 	import com.fefranca.*;
 	import com.fefranca.flixel.debug.FlxSpriteDebug;
+	
+	import org.flixel.FlxSprite;
 
 	public class Monkey extends FlxSpriteDebug
 	{
@@ -11,11 +12,12 @@ package se.GGJgame
 		[Embed( source='../../../resources/hats.png' )] private var ImgHats:Class;
 		
 		public var _hatSprite:FlxSprite;
-		public var currentHat:int;
+		public var team:int;
 		
 		public function Monkey(X:int=0, Y:int=0, SimpleGraphic:Class=null)
 		{
 			//add for debug
+			super(X,Y,SimpleGraphic);
 			this.showCollisionRects = true;
 			//super( X, Y, ImgPlayer );
 			
@@ -30,11 +32,11 @@ package se.GGJgame
 			_hatSprite.addAnimation("4",[4]);
 			
 			addAnimation( "normal", [0] ); 
-			currentHat = 0;
+			team = 0;
 			//this.add(_hatSprite);
 			
-			this.acceleration.x = 1;
-			this.acceleration.y = 1;
+			//this.acceleration.x = 1;
+			//this.acceleration.y = 1;
 			
 			
 			
@@ -45,7 +47,7 @@ package se.GGJgame
 		{	
 			_hatSprite.x = x;
 			_hatSprite.y = y-7;
-			_hatSprite.play(currentHat.toString());
+			_hatSprite.play(team.toString());
 			_hatSprite.update();			
 			super.update();	
 		}
