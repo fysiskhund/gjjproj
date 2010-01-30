@@ -5,13 +5,16 @@ package se.GGJgame
 	public class ConflictTable
 	{
 		private var _ct:Array;
+		private var _numTeams:int;
 		
 		// The amount of time a conflict will rage on (in seconds)
-		private var conflictTime:Number = 30;
+		private var conflictTime:Number = 20;
 		
 		public function ConflictTable(numTeams:int=5)
 		{
 			_ct = new Array(numTeams);
+			_numTeams = numTeams;
+			
 			for (var i:int=0; i<numTeams; i++)
 			{
 				_ct[i] = new Array(numTeams);
@@ -34,7 +37,16 @@ package se.GGJgame
 		}
 		public function update():void
 		{
-			
+			for (var i:int = 0; i < _numTeams; i++)
+			{
+				for (var j:int = 0; j < _numTeams; j++)
+				{
+					if (_ct[i][j] > 0)
+					{
+						_ct[i][j] -= FlxG.elapsed;
+					}
+				}
+			} 
 		}
 
 	}

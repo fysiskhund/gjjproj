@@ -154,6 +154,7 @@ package se.GGJgame
 			for each (var it:Item in items) {
 				it.update();
 			}
+			conflicts.update();
 		}
 		
 	}
