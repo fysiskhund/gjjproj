@@ -39,8 +39,8 @@ package se.GGJgame
 			team = 0;
 			//this.add(_hatSprite);
 			
-			//this.acceleration.x = 1;
-			//this.acceleration.y = 1;
+			this.acceleration.x = 0;
+			this.acceleration.y = 0;
 			
 			
 			
