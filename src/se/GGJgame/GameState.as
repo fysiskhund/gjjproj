@@ -13,6 +13,7 @@ package se.GGJgame
 		public var lives:int;
 		private var _map:FlxTilemap;
 		private var _BGmap:FlxTilemap;
+		private var _leftInCutscene:Number;
 		
 		public var conflicts:ConflictTable;
 		
@@ -35,6 +36,7 @@ package se.GGJgame
 		{
 			super();			
 			
+			_leftInCutscene = 0;
 			FlxState.bgColor = 0xff107100;
 			player1 = new Player(250,50);
 			npcs = new Array();
@@ -75,6 +77,11 @@ package se.GGJgame
 						items.push(it);
 					}
 					else if(nr >=15 && nr <= 18) {
+						var n:Npc = new Npc(x*16,y*16,null,nr-10);
+						_lyrSprites.add(n);
+						npcs.push(n);
+					}
+					else if(nr == 19) { // big king
 						var n:Npc = new Npc(x*16,y*16,null,nr-10);
 						_lyrSprites.add(n);
 						npcs.push(n);
@@ -136,52 +143,61 @@ package se.GGJgame
 			if(lives == 0)
 				FlxG.switchState(GameOverState);
 		}
+		public function win():void {
+			FlxG.switchState(GameWinState);
+		}
 		
 		override public function update():void 
 		{
-			guiUpdate();
-			//text.text = lives.toString();
 			
-			player1.update();
-			_map.collide( player1 );
-			_map.collideArray(npcs);
-			_map.collide(_poo_p1);
-			FlxG.overlapArray(items, player1, player1.pickUp);
-			FlxG.overlapArray(npcs, _poo_p1, _poo_p1.hit);
-			
-			
-			this.text.text = player1.bananas.toString() + " - " + player1.poo.toString();
+			if(_leftInCutscene <= 0) {
+				guiUpdate();
+				//text.text = lives.toString();
+				
+				player1.update();
+				_map.collide( player1 );
+				_map.collideArray(npcs);
+				_map.collide(_poo_p1);
+				FlxG.overlapArray(items, player1, player1.pickUp);
+				FlxG.overlapArray(npcs, _poo_p1, _poo_p1.hit);
 
-
-			
-			if (FlxG.keys.SPACE)
-			{
-				if(player1.poo > 0)
+				this.text.text = player1.bananas.toString() + " - " + player1.poo.toString();
+	
+	
+				
+				if (FlxG.keys.SPACE)
 				{
-					_poo_p1.visible = true;
-					_poo_p1.throwPoo(player1.x, player1.y,  player1.dirX, player1.dirY);
-					player1.poo--;
+					if(player1.poo > 0)
+					{
+						_poo_p1.visible = true;
+						_poo_p1.throwPoo(player1.x, player1.y,  player1.dirX, player1.dirY);
+						player1.poo--;
+					}
+				
 				}
-			
+				if (FlxG.keys.ONE)
+				{
+					player1.team++;
+				}
+				if (FlxG.keys.TWO)
+				{
+					conflicts.setAtWar(3,2);
+					conflicts.setAtWar(2,3);
+				}
+				_poo_p1.update();
+				
+				for each (var np:Npc in npcs) {
+					np.update();
+				}
+				for each (var it:Item in items) {
+					it.update();
+				}
+				conflicts.update();
+			} else {
+				_leftInCutscene -= FlxG.elapsed;
+				FlxG.follow( player1 );
+				
 			}
-			if (FlxG.keys.ONE)
-			{
-				player1.team++;
-			}
-			if (FlxG.keys.TWO)
-			{
-				conflicts.setAtWar(3,2);
-				conflicts.setAtWar(2,3);
-			}
-			_poo_p1.update();
-			
-			for each (var np:Npc in npcs) {
-				np.update();
-			}
-			for each (var it:Item in items) {
-				it.update();
-			}
-			conflicts.update();
 		}
 		
 		public function guiUpdate():void

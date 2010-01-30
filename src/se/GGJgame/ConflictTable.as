@@ -59,6 +59,8 @@ package se.GGJgame
 		}
 		public function getAtWar(team0:int, team1:int):Boolean
 		{
+			if(team0 == 9 || team1 == 9)
+				return false;
 			if(team0 > 4)
 				team0 -= 4;
 			if(team1 > 4)
