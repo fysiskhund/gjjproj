@@ -22,7 +22,7 @@ package se.GGJgame
 			super( X, Y, SimpleGraphic );
 			loadGraphic( ImgPlayer, true/* animated */, true, 14, 12 );
 			//Bounding box tweaks
-			this.currentHat = 0;
+			this.team = 0;
 		}
 		
 		public function pickUp(item:Item, p:Player):void
@@ -34,7 +34,7 @@ package se.GGJgame
 	        			bananas++;
 	        		}
 	        		else if(item.type >= 1 && item.type <= 4) {
-	        			currentHat = item.type;
+	        			team = item.type;
 	        			var gs:GameState = (FlxG.state as GameState);
 	        			for each (var it:Item in gs.items) {
 	        				if(it.type > 0)
