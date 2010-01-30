@@ -11,6 +11,7 @@ package se.GGJgame
 		
 		public var _hatSprite:FlxSprite;
 		public var team:int;
+		public var hatOffset:int;
 		
 		public function Monkey(X:int=0, Y:int=0, SimpleGraphic:Class=null)
 		{
@@ -18,7 +19,7 @@ package se.GGJgame
 			super(X,Y,SimpleGraphic);
 			//this.showCollisionRects = true;
 			//super( X, Y, ImgPlayer );
-			
+			hatOffset = -7;
 			//load basic sprite image
 			loadGraphic( ImgMonkey, true/* animated */, true, 14, 12 );
 			_hatSprite = new FlxSprite();
@@ -49,7 +50,7 @@ package se.GGJgame
 		override public function update():void 
 		{	
 			_hatSprite.x = x;
-			_hatSprite.y = y-7;
+			_hatSprite.y = y + hatOffset;
 			_hatSprite.play(team.toString());
 			_hatSprite.update();			
 			super.update();	
