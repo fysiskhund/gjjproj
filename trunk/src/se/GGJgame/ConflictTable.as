@@ -32,6 +32,10 @@ package se.GGJgame
 				team0 -= 4;
 			if(team1 > 4)
 				team1 -= 4;
+			
+			if(team0 == team1)
+				return;	
+			
 			_ct[team0][team1] = conflictTime;
 			// Perhaps do some other stuff i.e. send guards to fight with each other
 		}
