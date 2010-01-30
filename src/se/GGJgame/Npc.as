@@ -59,7 +59,8 @@ package se.GGJgame
 			{
 				if (d < 10) {
 					//
-					//gs.die();
+					if (p == gs.player1)
+						gs.die();
 					loadGraphic(FightImg,true,false,19,19);
 				} else if (d < 100) {
 					// Stalk
