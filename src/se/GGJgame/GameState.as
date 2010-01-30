@@ -42,7 +42,7 @@ package se.GGJgame
 			
 			_map = new FlxTilemap();
 			_map.loadMap( new mapData, mapTiles);
-			_map.collideIndex = 19;
+			_map.collideIndex = 20;
 			_map.follow();
 			_map.x = 0;
 			_map.y = 0; 

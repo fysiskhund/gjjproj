@@ -22,7 +22,7 @@ package se.GGJgame
 			
 			super( X, Y, SimpleGraphic );
 			loadGraphic( ImgPlayer, true/* animated */, true, 14, 12 );
-			
+			//Bounding box tweaks
 		}
 		
 		override public function update():void 
