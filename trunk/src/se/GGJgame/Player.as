@@ -80,6 +80,8 @@ package se.GGJgame
 				velocity.x = 0;
 			}
 			velocity.normalize(_move_speed);
+			velocity.normalize(_move_speed);
+			
 			super.update();	
 		}
 		
