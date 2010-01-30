@@ -101,7 +101,7 @@ package se.GGJgame
 				}
 			}
 			
-			lives = 3;
+			lives = 1;
 			conflicts = new ConflictTable(5);
 			
 			//npcs.push(new Npc(20,20,null,2));
