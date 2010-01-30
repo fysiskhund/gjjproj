@@ -22,7 +22,7 @@ package se.GGJgame
 			iDirX = dirX;
    			iDirY = dirY;
    			x = posX;
-   			y = posY;
+   			y = posY+6;
    			ttl = 20;
 		}
 		override public function update():void 
