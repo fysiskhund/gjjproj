@@ -30,6 +30,11 @@ package se.GGJgame
 			_hatSprite.addAnimation("2",[2]);
 			_hatSprite.addAnimation("3",[3]);
 			_hatSprite.addAnimation("4",[4]);
+			_hatSprite.addAnimation("5",[5]);
+			_hatSprite.addAnimation("6",[6]);
+			_hatSprite.addAnimation("7",[7]);
+			_hatSprite.addAnimation("8",[8]);
+			_hatSprite.addAnimation("9",[9]);
 			
 			addAnimation( "normal", [0] ); 
 			team = 0;
