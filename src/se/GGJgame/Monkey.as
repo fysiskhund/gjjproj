@@ -29,6 +29,13 @@ package se.GGJgame
 			currentHat = 0;
 			//this.add(_hatSprite);
 			
+			this.acceleration.x = 1;
+			this.acceleration.y = 1;
+			
+			//Bounding box tweaks
+			this.height = 16;
+			this.width = 16;
+			
 			
 		}
 		
