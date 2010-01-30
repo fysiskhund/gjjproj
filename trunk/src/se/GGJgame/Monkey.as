@@ -15,6 +15,7 @@ package se.GGJgame
 		
 		public function Monkey(X:int=0, Y:int=0, SimpleGraphic:Class=null)
 		{
+			//add for debug
 			this.showCollisionRects = true;
 			//super( X, Y, ImgPlayer );
 			
@@ -35,9 +36,7 @@ package se.GGJgame
 			this.acceleration.x = 1;
 			this.acceleration.y = 1;
 			
-			//Bounding box tweaks
-			this.height = 16;
-			this.width = 16;
+			
 			
 			
 		}
