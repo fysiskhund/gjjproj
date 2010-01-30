@@ -87,6 +87,7 @@ package se.GGJgame
 					//
 					if (p == gs.player1)
 						gs.die();
+					this.velocity = new Point(0,0);
 					loadGraphic(FightImg,true,false,19,19);
 				} else if (d < 100) {
 					// Stalk

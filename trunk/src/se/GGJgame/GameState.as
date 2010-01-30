@@ -204,6 +204,9 @@ package se.GGJgame
 				_map.collide( player1 );
 				_map.collideArray(npcs);
 				_map.collide(_poo_p1);
+				player1.collideArray(ninjaNpcs);
+				
+				
 				FlxG.overlapArray(items, player1, player1.pickUp);
 				FlxG.overlapArray(npcs, _poo_p1, _poo_p1.hit);
 
