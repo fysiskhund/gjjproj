@@ -144,6 +144,7 @@ package se.GGJgame
 			if (FlxG.keys.TWO)
 			{
 				conflicts.setAtWar(3,2);
+				conflicts.setAtWar(2,3);
 			}
 			_poo_p1.update();
 			
