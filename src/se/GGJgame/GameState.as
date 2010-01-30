@@ -1,6 +1,8 @@
 package se.GGJgame
 {
 	
+	import flash.geom.Point;
+	
 	import org.flixel.*;
 	
 
@@ -51,8 +53,11 @@ package se.GGJgame
     	    _lyrGUI = new FlxLayer;
 	        this.setupGUI();
     	    
-    	    this.text = new FlxText( 0, 0, FlxG.width, "ABC" );
+    	    this.text = new FlxText( 0, FlxG.height/2-32, FlxG.width, "" );
+    	    this.text.visible = false;
+    	    text.scrollFactor = new Point(0,0);
 			text.setFormat( null, 16, 0xFFFFFFFF, "center" );
+			
 			_lyrGUI.add(text);
 			
 			_map = new FlxTilemap();
@@ -152,7 +157,7 @@ package se.GGJgame
 		}
 		
 		public function doCutScene():void {
-			_leftInCutscene = 9;
+			_leftInCutscene = 10;
 			cameraTarget.x = player1.x;
 			cameraTarget.y = player1.y;
 		}
@@ -175,8 +180,6 @@ package se.GGJgame
 				FlxG.overlapArray(items, player1, player1.pickUp);
 				FlxG.overlapArray(npcs, _poo_p1, _poo_p1.hit);
 
-				this.text.text = player1.bananas.toString() + " - " + player1.poo.toString();
-	
 	
 				
 				if (FlxG.keys.SPACE)
@@ -209,11 +212,12 @@ package se.GGJgame
 				conflicts.update();
 			}
 			else if(_leftInCutscene <= 0) {	
+				text.visible = false;
 				endCutScene();
 			}
 			else {
 				_leftInCutscene -= FlxG.elapsed;
-				var elapsed:Number = 9-_leftInCutscene;
+				var elapsed:Number = 10-_leftInCutscene;
 				
 				if(elapsed <=2) {
 					cameraTarget.x =  lerp(player1.x,king.x,elapsed/2);
@@ -221,10 +225,18 @@ package se.GGJgame
 				} else if (elapsed >= 7) {
 					cameraTarget.x =  player1.x;
 					cameraTarget.y =  player1.y;
+					var left:String = _leftInCutscene.toString().substr(0,1);
+					if(left == "0")
+						text.text = "Go!";
+					else
+						text.text = left;
+					text.visible = true;
+					//text.update();
 				} else if (elapsed >= 5) {
 					cameraTarget.x =  lerp(king.x,player1.x,(elapsed-5)/2);
 					cameraTarget.y =  lerp(king.y,player1.y,(elapsed-5)/2);
 				} else {
+					
 					cameraTarget.x =  king.x;
 					cameraTarget.y =  king.y;
 				}
