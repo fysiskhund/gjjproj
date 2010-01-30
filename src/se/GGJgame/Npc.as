@@ -13,7 +13,7 @@ package se.GGJgame
 		public var dirY:int;
 		
 		
-		private var _oPos:Point;
+		protected var _oPos:Point;
 
 		private var _move_speed:int = 90; // just a tweak
 		
@@ -51,6 +51,20 @@ package se.GGJgame
 			
 			d = this.dist(this.x,this.y,p.x,p.y);
 			//Testing for enemy monkeys
+			for each (var monkey:Npc in gs.ninjaNpcs)
+			{
+				if (gs.conflicts.getAtWar(team, monkey.team))
+				{
+					var dNpc:Number;
+					dNpc = dist(x, y, monkey.x, monkey.y);
+					
+					if (dNpc < d) // Found a hostile closer
+					{
+						p = monkey; // Switch objective to that monkey
+						d = dNpc; // Register new distance value
+					}
+				}
+			}
 			for each (var monkey:Npc in gs.npcs)
 			{
 				if (gs.conflicts.getAtWar(team, monkey.team))
@@ -65,6 +79,7 @@ package se.GGJgame
 					}
 				}
 			}
+			
 			
 			if(gs.conflicts.getAtWar(team, p.team))
 			{
@@ -102,7 +117,7 @@ package se.GGJgame
 			super.update();
 		}
 		
-		private function dist(x1:Number, y1:Number, x2:Number, y2:Number):Number
+		protected function dist(x1:Number, y1:Number, x2:Number, y2:Number):Number
 		{
 			return Math.sqrt(Math.pow(x2-x1,2) + Math.pow(y2-y1,2));
 		}

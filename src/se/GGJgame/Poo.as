@@ -29,7 +29,7 @@ package se.GGJgame
    			ttl = 0.5;
 		}
 
-		public function hit(n:Npc, p:Poo)
+		public function hit(n:Npc, p:Poo):void
 		{
 			if(ttl > 0)
 			{
