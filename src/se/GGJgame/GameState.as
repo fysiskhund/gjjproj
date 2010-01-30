@@ -1,6 +1,8 @@
 package se.GGJgame
 {
 	
+	import mx.core.FlexSprite;
+	
 	import org.flixel.*;
 	
 
@@ -8,6 +10,8 @@ package se.GGJgame
 	{
 		public var player1:Player;
 		public var npcs:Array;
+		private var king:Npc;
+		private var cameraTarget:FlexSprite;
 		public var items:Array;
 		public var text:FlxText;
 		public var lives:int;
@@ -38,6 +42,7 @@ package se.GGJgame
 			
 			_leftInCutscene = Number.NEGATIVE_INFINITY;
 			FlxState.bgColor = 0xff107100;
+			cameraTarget = new FlexSprite();
 			player1 = new Player(250,50);
 			npcs = new Array();
 			items = new Array();
@@ -82,9 +87,9 @@ package se.GGJgame
 						npcs.push(n);
 					}
 					else if(nr == 19) { // big king
-						var n:Npc = new Npc(x*16,y*16,null,nr-10);
-						_lyrSprites.add(n);
-						npcs.push(n);
+						king = new Npc(x*16,y*16,null,nr-10);
+						_lyrSprites.add(king);
+						npcs.push(king);
 					}
 					else if(nr >= 20 && nr <= 23)
 					{
@@ -149,9 +154,11 @@ package se.GGJgame
 		
 		public function doCutScene():void {
 			_leftInCutscene = 3;
+			//FlxG.follow( cameraTarget );
 		}
 		public function endCutScene():void {
 			_leftInCutscene = Number.NEGATIVE_INFINITY;
+			FlxG.follow( player1 );
 		}
 		
 		override public function update():void 
@@ -200,10 +207,12 @@ package se.GGJgame
 					it.update();
 				}
 				conflicts.update();
-			} else {
-				_leftInCutscene -= FlxG.elapsed;
-				FlxG.follow( player1 );
-				
+			}
+			else if(_leftInCutscene <= 0) {
+				endCutScene();
+			}
+			else {
+				_leftInCutscene -= FlxG.elapsed;				
 			}
 		}
 		
