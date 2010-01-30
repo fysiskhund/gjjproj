@@ -8,7 +8,8 @@ package se.GGJgame
 		private var _numTeams:int;
 		
 		// The amount of time a conflict will rage on (in seconds)
-		private var conflictTime:Number = 20;
+		private var conflictTimeShort:Number = 25;
+		private var conflictTimeLong:Number = 10;
 		
 		public function ConflictTable(numTeams:int=5)
 		{
@@ -28,16 +29,28 @@ package se.GGJgame
 		}
 		public function setAtWar(team0:int, team1:int):void
 		{
-			if(team0 > 4)
-				team0 -= 4;
-			if(team1 > 4)
-				team1 -= 4;
+			var conflictTime:Number;
+			conflictTime = conflictTimeShort;
 			
 			if(team0 == team1)
-				return;	
+				return;
 			
-			_ct[team0][team1] = conflictTime;
-			// Perhaps do some other stuff i.e. send guards to fight with each other
+			if(team0 > 4)
+			{
+				team0 -= 4;
+				conflictTime = conflictTimeLong;
+			}
+			if(team1 > 4)
+			{
+				team1 -= 4;
+				conflictTime = conflictTimeLong;
+			}
+
+			// Prevent from extending time by repeatedly pestering someone
+			if (_ct[team0][team1] < 0) 
+			{
+				_ct[team0][team1] = conflictTime;
+			}
 		}
 		public function getAtWar(team0:int, team1:int):Boolean
 		{
