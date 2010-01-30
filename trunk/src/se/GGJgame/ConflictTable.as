@@ -7,6 +7,7 @@ package se.GGJgame
 	public class ConflictTable
 	{
 		[Embed( source='../../../resources/monkey.png' )] private var ImgMonkey:Class;
+		[Embed( source='../../../resources/monkey_ninja.png' )] private var ImgNinja:Class;
 		
 		private var _ct:Array;
 		private var _numTeams:int;
@@ -89,6 +90,13 @@ package se.GGJgame
 									monkey.loadGraphic( ImgMonkey, true/* animated */, true, 14, 12 );
 								}
 							} 
+							for each (var monkey:Monkey in _gs.ninjaNpcs)
+							{
+								if (monkey.team == i)
+								{
+									monkey.loadGraphic( ImgNinja, true/* animated */, true, 14, 12 );
+								}
+							}
 						}
 					}
 				}

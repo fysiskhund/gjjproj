@@ -10,6 +10,7 @@ package se.GGJgame
 	{
 		public var player1:Player;
 		public var npcs:Array;
+		public var ninjaNpcs:Array;
 		private var king:Npc;
 		private var cameraTarget:Npc;
 		public var items:Array;
@@ -46,6 +47,7 @@ package se.GGJgame
 			cameraTarget.visible = true;
 			player1 = new Player(250,50);
 			npcs = new Array();
+			ninjaNpcs = new Array();
 			items = new Array();
 			_lyrStage = new FlxLayer;
 	        _lyrSprites = new FlxLayer;
@@ -106,6 +108,21 @@ package se.GGJgame
 						var n:Npc = new Npc(x*16,y*16,null,nr-23);
 						_lyrSprites.add(n);
 						npcs.push(n);
+					}
+					else if(nr >= 7 && nr <= 9)
+					{//BRP
+						// Add the king's guards (blue, red, purple)
+						var nj:Npc = new NinjaNpc(x*16,y*16,null, nr-6);
+						_lyrSprites.add(nj);
+						ninjaNpcs.push(nj);
+						_lyrSprites.add(nj._hatSprite);
+					} else if (nr == 28) 
+					{// T
+						// Last of the king's guards (Triangle)
+						var nj:Npc = new NinjaNpc(x*16,y*16,null, 4);
+						_lyrSprites.add(nj);
+						ninjaNpcs.push(nj);
+						_lyrSprites.add(nj._hatSprite);
 					}
 				}
 			}
@@ -206,6 +223,9 @@ package se.GGJgame
 				for each (var np:Npc in npcs) {
 					np.update();
 				}
+				for each (var nj:NinjaNpc in ninjaNpcs) {
+					nj.update();
+				}
 				for each (var it:Item in items) {
 					it.update();
 				}
@@ -239,7 +259,11 @@ package se.GGJgame
 					
 					cameraTarget.x =  king.x;
 					cameraTarget.y =  king.y;
+					for each (var nj:NinjaNpc in ninjaNpcs) {
+						nj.update();
+					}
 				}
+				
 				FlxG.follow( cameraTarget );
 				cameraTarget.update();	
 			}
