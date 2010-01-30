@@ -36,7 +36,7 @@ package se.GGJgame
 		{
 			super();			
 			
-			_leftInCutscene = 0;
+			_leftInCutscene = Number.NEGATIVE_INFINITY;
 			FlxState.bgColor = 0xff107100;
 			player1 = new Player(250,50);
 			npcs = new Array();
@@ -147,10 +147,17 @@ package se.GGJgame
 			FlxG.switchState(GameWinState);
 		}
 		
+		public function doCutScene():void {
+			_leftInCutscene = 3;
+		}
+		public function endCutScene():void {
+			_leftInCutscene = Number.NEGATIVE_INFINITY;
+		}
+		
 		override public function update():void 
 		{
 			
-			if(_leftInCutscene <= 0) {
+			if(_leftInCutscene == Number.NEGATIVE_INFINITY) {				
 				guiUpdate();
 				//text.text = lives.toString();
 				

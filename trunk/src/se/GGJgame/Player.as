@@ -76,7 +76,7 @@ package se.GGJgame
 			{
 				if(_timeToPoo == Number.POSITIVE_INFINITY)
 				{
-					_timeToPoo = 3;
+					_timeToPoo = 5;
 				}
 				else if(_timeToPoo <= 0)
 				{
