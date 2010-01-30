@@ -1,8 +1,6 @@
 package se.GGJgame
 {
 	
-	import mx.core.FlexSprite;
-	
 	import org.flixel.*;
 	
 
@@ -11,7 +9,7 @@ package se.GGJgame
 		public var player1:Player;
 		public var npcs:Array;
 		private var king:Npc;
-		private var cameraTarget:FlexSprite;
+		private var cameraTarget:Npc;
 		public var items:Array;
 		public var text:FlxText;
 		public var lives:int;
@@ -42,7 +40,8 @@ package se.GGJgame
 			
 			_leftInCutscene = Number.NEGATIVE_INFINITY;
 			FlxState.bgColor = 0xff107100;
-			cameraTarget = new FlexSprite();
+			cameraTarget = new Npc();
+			cameraTarget.visible = true;
 			player1 = new Player(250,50);
 			npcs = new Array();
 			items = new Array();
@@ -153,8 +152,9 @@ package se.GGJgame
 		}
 		
 		public function doCutScene():void {
-			_leftInCutscene = 3;
-			//FlxG.follow( cameraTarget );
+			_leftInCutscene = 9;
+			cameraTarget.x = player1.x;
+			cameraTarget.y = player1.y;
 		}
 		public function endCutScene():void {
 			_leftInCutscene = Number.NEGATIVE_INFINITY;
@@ -208,11 +208,28 @@ package se.GGJgame
 				}
 				conflicts.update();
 			}
-			else if(_leftInCutscene <= 0) {
+			else if(_leftInCutscene <= 0) {	
 				endCutScene();
 			}
 			else {
-				_leftInCutscene -= FlxG.elapsed;				
+				_leftInCutscene -= FlxG.elapsed;
+				var elapsed:Number = 9-_leftInCutscene;
+				
+				if(elapsed <=2) {
+					cameraTarget.x =  lerp(player1.x,king.x,elapsed/2);
+					cameraTarget.y =  lerp(player1.y,king.y,elapsed/2);
+				} else if (elapsed >= 7) {
+					cameraTarget.x =  player1.x;
+					cameraTarget.y =  player1.y;
+				} else if (elapsed >= 5) {
+					cameraTarget.x =  lerp(king.x,player1.x,(elapsed-5)/2);
+					cameraTarget.y =  lerp(king.y,player1.y,(elapsed-5)/2);
+				} else {
+					cameraTarget.x =  king.x;
+					cameraTarget.y =  king.y;
+				}
+				FlxG.follow( cameraTarget );
+				cameraTarget.update();	
 			}
 		}
 		
@@ -225,6 +242,11 @@ package se.GGJgame
 		{
 			_lyrGUI.scrollFactor.x = 0;
 	        _lyrGUI.scrollFactor.y = 0;
+		}
+		
+		public function lerp(a:Number, b:Number, amt:Number):Number {
+			amt = Math.min(Math.max(0,amt),1);
+			return a*(1-amt) + b*(amt);
 		}
 		
 	}
