@@ -13,7 +13,7 @@ package se.GGJgame
 		public var dirX:int;
 		public var dirY:int;
 
-		private var _move_speed:int = 60; // just a tweak
+		private var _move_speed:int = 50; // just a tweak
 		
 		[Embed( source='../../../resources/monkey_player.png' )] private var ImgPlayer:Class;
 		
