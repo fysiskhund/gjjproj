@@ -12,7 +12,7 @@ package se.GGJgame
 		public var poo:int;
 		
 		private var _lastPickup:Date;
-		private var _timeToPoo:Number;
+		public var _timeToPoo:Number;
 
 		private var _move_speed:int = 100; // just a tweak
 		

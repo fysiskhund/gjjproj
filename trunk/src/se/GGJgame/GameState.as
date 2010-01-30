@@ -34,6 +34,16 @@ package se.GGJgame
 		[Embed(source = "../../../resources/tiles.png")] public static var mapTiles:Class;
 		[Embed(source = "../../../resources/example_map.txt", mimeType = "application/octet-stream")] public static var mapData:Class;		
 		
+		//GUI resource 
+		[Embed(source = "../../../resources/GUIpoo.png")] public static var pooCount:Class;
+		[Embed(source = "../../../resources/GUIbg.png")] public static var GUIbg:Class;
+		[Embed(source = "../../../resources/GUIbanana.png")] public static var GUIbanana:Class;
+		private var _guiText:FlxText;
+		private var _guiPooSprite:FlxSprite;
+		private var _guiBananaSprite:FlxSprite;
+		private var _guiMain:FlxSprite;
+		private var _coolingDown:Boolean;
+
 		//Just preparing for an eventual second player
 		private var _player2:Player;
 		
@@ -185,7 +195,7 @@ package se.GGJgame
 		
 		override public function update():void 
 		{
-			
+
 			if(_leftInCutscene == Number.NEGATIVE_INFINITY) {				
 				guiUpdate();
 				//text.text = lives.toString();
@@ -271,13 +281,82 @@ package se.GGJgame
 		
 		public function guiUpdate():void
 		{
-			
+			var infinity:Boolean = (player1._timeToPoo == Number.POSITIVE_INFINITY);
+			if( player1._timeToPoo > 4 && !infinity ) {
+				_guiPooSprite.play( "not ready" );
+			} else if ( player1._timeToPoo > 3 && !infinity ) {
+				_guiPooSprite.play( "cooldown2" );
+			} else if ( player1._timeToPoo > 2 && !infinity) {
+				_guiPooSprite.play( "cooldown3" );
+			} else if ( player1._timeToPoo > 1 && !infinity) {
+				_guiPooSprite.play( "cooldown4" );
+			} else if ( player1._timeToPoo > 0 && !infinity) {
+				_guiPooSprite.play( "cooldown5" );
+			} else if ( player1.poo == 1 ) {
+				_guiPooSprite.play( "ready" );
+			} else if ( player1.poo == 0 ) {
+				_guiPooSprite.play( "not ready" );
+			}
+			this._guiText.text = "x" + (player1.bananas).toString();
 		}
 		
 		public function setupGUI():void
 		{
 			_lyrGUI.scrollFactor.x = 0;
 	        _lyrGUI.scrollFactor.y = 0;
+	        _guiPooSprite = new FlxSprite();
+	        _guiMain = new FlxSprite();
+	        _guiBananaSprite = new FlxSprite();
+	        
+	        _guiText = new FlxText( 20, FlxG.height - 20, 50, "x" + (player1.bananas).toString() );
+			_guiText.setFormat( null, 16, 0x00000000, "left" );
+	        
+	        /*
+	        _guiPooSprite.y = FlxG.height - _guiPooSprite.height * 2;
+	        _guiPooSprite.x = _guiMain.width;
+	        _guiMain.y = FlxG.height - _guiMain.height * 2;
+	        */
+	        
+	        _guiPooSprite.y = FlxG.height - 20;
+	        _guiPooSprite.x = 77;
+	        _guiBananaSprite.y = FlxG.height - 17;
+	        _guiBananaSprite.x = 2;
+	        _guiMain.y = FlxG.height - 20;
+	        
+	        _guiPooSprite.scrollFactor.x = 0;
+	        _guiPooSprite.scrollFactor.y = 0;
+	        _guiMain.scrollFactor.x = 0;
+	        _guiMain.scrollFactor.y = 0;
+	        _guiBananaSprite.scrollFactor.x = 0;
+	        _guiBananaSprite.scrollFactor.y = 0;
+	        _guiText.scrollFactor.x = 0;
+	        _guiText.scrollFactor.y = 0;
+	        	        	       
+	        _guiPooSprite.loadGraphic( pooCount, true, false, 20, 20 );
+   			//_guiPooSprite.addAnimation( "cooldown",[0, 1, 2, 3, 4, 5], 3);
+   			//_guiPooSprite.addAnimation( "ready",[5], 3 );
+   			//_guiPooSprite.addAnimation( "not ready",[0], 3 );
+   			//_guiPooSprite.play( "not ready" );
+   			_guiPooSprite.addAnimation( "not ready",[0]);
+   			_guiPooSprite.addAnimation( "cooldown1",[1]);
+   			_guiPooSprite.addAnimation( "cooldown2",[2]);
+   			_guiPooSprite.addAnimation( "cooldown3",[3]);
+   			_guiPooSprite.addAnimation( "cooldown4",[4]);
+   			_guiPooSprite.addAnimation( "cooldown5",[5]);
+   			_guiPooSprite.addAnimation( "ready",[6]);
+   			
+   			_coolingDown = false;
+   			
+   			_guiBananaSprite.loadGraphic( GUIbanana, false, false, 20, 20 );
+   			
+   			_guiMain.loadGraphic( GUIbg, false, false, 100, 20 );
+   			
+   			
+   			_lyrGUI.add( _guiMain );
+   			_lyrGUI.add( _guiPooSprite );
+   			_lyrGUI.add( _guiBananaSprite );
+			_lyrGUI.add( _guiText );
+
 		}
 		
 		public function lerp(a:Number, b:Number, amt:Number):Number {
