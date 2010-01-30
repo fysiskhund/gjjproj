@@ -15,10 +15,13 @@ package se.GGJgame
 
 		private var _move_speed:int = 60; // just a tweak
 		
+		[Embed( source='../../../resources/monkey_player.png' )] private var ImgPlayer:Class;
+		
 		public function Player( X:int=0, Y:int=0, SimpleGraphic:Class=null )
 		{
-			super( X, Y, SimpleGraphic );
 			
+			super( X, Y, SimpleGraphic );
+			loadGraphic( ImgPlayer, true/* animated */, true, 14, 12 );
 			
 		}
 		
