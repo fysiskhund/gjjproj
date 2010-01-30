@@ -2,6 +2,8 @@ package se.GGJgame
 {
 	
 	import org.flixel.*;
+	import org.flixel.data.FlxAnim;
+	
 
 	public class GameState extends FlxState
 	{
@@ -96,6 +98,8 @@ package se.GGJgame
 			
 			player1.update();
 			_map.collide( player1 );
+			_map.collideArray(npcs);
+
 
 			
 			if (FlxG.keys.SPACE)

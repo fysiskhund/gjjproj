@@ -15,7 +15,7 @@ package se.GGJgame
 		
 		private var _oPos:Point;
 
-		private var _move_speed:int = 40; // just a tweak
+		private var _move_speed:int = 70; // just a tweak
 		
 		public function Npc( X:int=0, Y:int=0, SimpleGraphic:Class=null, team:int=0 )
 		{
@@ -41,7 +41,7 @@ package se.GGJgame
 			if(d < 10) {
 				gs.die();
 			}
-			else if (d < 60) {
+			else if (d < 100) {
 				this.velocity.x = p.x - this.x;
 				this.velocity.y = p.y - this.y;
 				this.velocity.normalize(_move_speed);
