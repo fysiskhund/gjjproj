@@ -10,16 +10,19 @@ package se.GGJgame
 		public var text:FlxText;
 		public var lives:int;
 		private var _map:FlxTilemap;
+		private var _BGmap:FlxTilemap;
+		
 		private var _poo_p1:Poo;
 
 		//layers so we can overlap HUD ect.		
 		private var _lyrStage:FlxLayer;
+		private var _lyrStageBack:FlxLayer;
+
         private var _lyrSprites:FlxLayer;
         private var _lyrHUD:FlxLayer;
 
-		
-		[Embed(source = "../../../resources/example_chip.png")] public static var mapTiles:Class;
-		[Embed(source = "../../../resources/example_map.txt", mimeType = "application/octet-stream")] public static var mapData:Class;
+		[Embed(source = "../../../resources/tiles.png")] public static var mapTiles:Class;
+		[Embed(source = "../../../resources/example_map.txt", mimeType = "application/octet-stream")] public static var mapData:Class;		
 		
 		//Just preparing for an eventual second player
 		private var _player2:Player;
@@ -36,7 +39,11 @@ package se.GGJgame
     	    _lyrHUD = new FlxLayer;
 			
 			_map = new FlxTilemap();
-			_map.loadMap( new mapData, mapTiles, 16, 16);
+			_map.loadMap( new mapData, mapTiles);
+			_map.collideIndex = 19;
+			_map.follow();
+			_map.x = 0;
+			_map.y = 0; 
 			_lyrStage.add( _map );
 			
 			lives = 3;
@@ -47,7 +54,7 @@ package se.GGJgame
 				_lyrSprites.add(np._hatSprite);
 			}
 		
-			player1 = new Player( 34, 10 );
+			player1 = new Player();
 			_lyrSprites.add( player1 );
 
 			this.text = new FlxText( 0, 0, FlxG.width, "ABC" );
@@ -84,12 +91,12 @@ package se.GGJgame
 		
 		override public function update():void 
 		{
-			super.update();
 			
 			text.text = lives.toString();
 			
 			player1.update();
 			_map.collide( player1 );
+
 			
 			if (FlxG.keys.SPACE)
 			{
