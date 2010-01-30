@@ -32,7 +32,7 @@ package se.GGJgame
 			if (FlxG.keys.UP)
 			{
 				facing = UP;
-				velocity.y = -_move_speed;
+				velocity.y = -1;
 				dirY = -1;
 				if (! (FlxG.keys.LEFT || FlxG.keys.RIGHT))
 				{
@@ -42,7 +42,7 @@ package se.GGJgame
 			} else if (FlxG.keys.DOWN)
 			{
 				facing = DOWN;
-				velocity.y = _move_speed;
+				velocity.y = 1;
 				dirY = 1;
 				if (! (FlxG.keys.LEFT || FlxG.keys.RIGHT))
 				{
@@ -58,7 +58,7 @@ package se.GGJgame
 			if (FlxG.keys.LEFT)
 			{
 				facing = LEFT;
-				velocity.x = -_move_speed;
+				velocity.x = -1;
 				dirX = -1;
 				if (! (FlxG.keys.UP || FlxG.keys.DOWN))
 				{
@@ -68,7 +68,7 @@ package se.GGJgame
 			} else if (FlxG.keys.RIGHT)
 			{
 				facing = RIGHT;
-				velocity.x = _move_speed;		
+				velocity.x = 1;		
 				dirX = 1;
 				if (! (FlxG.keys.UP || FlxG.keys.DOWN))
 				{
@@ -79,7 +79,7 @@ package se.GGJgame
 			{
 				velocity.x = 0;
 			}
-			
+			velocity.normalize(_move_speed);
 			super.update();	
 		}
 		
