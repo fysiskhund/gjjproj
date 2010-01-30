@@ -1,12 +1,10 @@
 package se.GGJgame
 {
 
-	import com.fefranca.*;
-	import com.fefranca.flixel.debug.FlxSpriteDebug;
 	
 	import org.flixel.FlxSprite;
 
-	public class Monkey extends FlxSpriteDebug
+	public class Monkey extends FlxSprite
 	{
 		[Embed( source='../../../resources/monkey.png' )] private var ImgMonkey:Class;
 		[Embed( source='../../../resources/hats.png' )] private var ImgHats:Class;
@@ -18,7 +16,7 @@ package se.GGJgame
 		{
 			//add for debug
 			super(X,Y,SimpleGraphic);
-			this.showCollisionRects = true;
+			//this.showCollisionRects = true;
 			//super( X, Y, ImgPlayer );
 			
 			//load basic sprite image
