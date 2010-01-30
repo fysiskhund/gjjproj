@@ -15,7 +15,7 @@ package se.GGJgame
 		
 		private var _oPos:Point;
 
-		private var _move_speed:int = 70; // just a tweak
+		private var _move_speed:int = 90; // just a tweak
 		
 		public function Npc( X:int=0, Y:int=0, SimpleGraphic:Class=null, team:int=0 )
 		{
