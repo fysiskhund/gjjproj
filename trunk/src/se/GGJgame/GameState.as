@@ -23,7 +23,7 @@ package se.GGJgame
 		private var _lyrStageBack:FlxLayer;
 
         private var _lyrSprites:FlxLayer;
-        private var _lyrHUD:FlxLayer;
+        private var _lyrGUI:FlxLayer;
 
 		[Embed(source = "../../../resources/tiles.png")] public static var mapTiles:Class;
 		[Embed(source = "../../../resources/example_map.txt", mimeType = "application/octet-stream")] public static var mapData:Class;		
@@ -41,11 +41,13 @@ package se.GGJgame
 			items = new Array();
 			_lyrStage = new FlxLayer;
 	        _lyrSprites = new FlxLayer;
-    	    _lyrHUD = new FlxLayer;
+    	    
+    	    _lyrGUI = new FlxLayer;
+	        this.setupGUI();
     	    
     	    this.text = new FlxText( 0, 0, FlxG.width, "ABC" );
 			text.setFormat( null, 16, 0xFFFFFFFF, "center" );
-			_lyrHUD.add(text);
+			_lyrGUI.add(text);
 			
 			_map = new FlxTilemap();
 			_map.loadMap( new mapData, mapTiles);
@@ -101,7 +103,7 @@ package se.GGJgame
 			//add layers in order, stage  in bottom etc.			
 			this.add(_lyrStage);
             this.add(_lyrSprites);
-            this.add(_lyrHUD);
+            this.add(_lyrGUI);
 
 			this.add( _poo_p1);
 			this.add( player1._hatSprite);
@@ -120,7 +122,7 @@ package se.GGJgame
 		
 		override public function update():void 
 		{
-			
+			guiUpdate();
 			//text.text = lives.toString();
 			
 			player1.update();
@@ -163,6 +165,17 @@ package se.GGJgame
 				it.update();
 			}
 			conflicts.update();
+		}
+		
+		public function guiUpdate():void
+		{
+			
+		}
+		
+		public function setupGUI():void
+		{
+			_lyrGUI.scrollFactor.x = 0;
+	        _lyrGUI.scrollFactor.y = 0;
 		}
 		
 	}

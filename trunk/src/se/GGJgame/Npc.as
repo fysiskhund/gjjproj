@@ -17,6 +17,17 @@ package se.GGJgame
 
 		private var _move_speed:int = 90; // just a tweak
 		
+		public const TEAM_NONE:int = 0;
+		public const TEAM_BLUE:int = 1;
+		public const TEAM_RED:int = 2;
+		public const TEAM_PURPLE:int = 3;
+		public const TEAM_TEAL:int = 4;
+		public const TEAM_BLUE_BOSS:int = 5;
+		public const TEAM_RED_BOSS:int = 6;
+		public const TEAM_PURPLE_BOSS:int = 7;
+		public const TEAM_TEAL_BOSS:int = 8;
+		public const TEAM_KING:int = 9;
+		
 		public function Npc( X:int=0, Y:int=0, SimpleGraphic:Class=null, monkeyTeam:int=0 )
 		{
 			super( X, Y, SimpleGraphic );
