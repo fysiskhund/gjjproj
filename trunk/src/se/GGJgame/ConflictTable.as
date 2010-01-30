@@ -1,15 +1,20 @@
 package se.GGJgame
 {
+	
 	import org.flixel.FlxG;
+	import org.flixel.FlxSprite;
 	
 	public class ConflictTable
 	{
+		[Embed( source='../../../resources/monkey.png' )] private var ImgMonkey:Class;
+		
 		private var _ct:Array;
 		private var _numTeams:int;
 		
 		// The amount of time a conflict will rage on (in seconds)
 		private var conflictTimeShort:Number = 25;
 		private var conflictTimeLong:Number = 10;
+		private var _gs:GameState = (FlxG.state as GameState);
 		
 		public function ConflictTable(numTeams:int=5)
 		{
@@ -70,6 +75,19 @@ package se.GGJgame
 					if (_ct[i][j] > 0)
 					{
 						_ct[i][j] -= FlxG.elapsed;
+						
+						// Restore guards' sprites once conflict is over
+						// in case they were fighting..
+						if (_ct[i][j] < 0)
+						{
+							for each (var monkey:Monkey in _gs.npcs)
+							{
+								if (monkey.team == i)
+								{
+									monkey.loadGraphic( ImgMonkey, true/* animated */, true, 14, 12 );
+								}
+							} 
+						}
 					}
 				}
 			} 
