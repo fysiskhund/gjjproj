@@ -38,8 +38,7 @@ package se.GGJgame
 			var conflictTime:Number;
 			conflictTime = conflictTimeShort;
 			
-			if(team0 == team1)
-				return;
+			
 			
 			if(team0 > 4)
 			{
@@ -51,7 +50,10 @@ package se.GGJgame
 				team1 -= 4;
 				conflictTime = conflictTimeLong;
 			}
-
+			
+			if(team0 == team1)
+				return;
+			
 			// Prevent from extending time by repeatedly pestering someone
 			if (ct[team0][team1] < 0) 
 			{
