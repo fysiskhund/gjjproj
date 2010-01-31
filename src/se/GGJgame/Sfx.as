@@ -8,6 +8,7 @@ package se.GGJgame
 	{
 		private var _countStage:int;
 		[Embed(source = "../../../resources/playMusic.mp3")] public static var playSong:Class;
+		[Embed(source = "../../../resources/menuMusic.mp3")] public static var menuSong:Class;
 		[Embed(source = "../../../resources/lose.mp3")] public static var loseFx:Class;
 		[Embed(source = "../../../resources/win.mp3")] public static var winFx:Class;
 		[Embed(source = "../../../resources/chatter.mp3")] public static var chatterFx:Class;
@@ -27,6 +28,12 @@ package se.GGJgame
 			
 			
 		}
+		
+		public function menuMusic():void
+		{
+			FlxG.play(menuSong, 0.8, true);
+		}
+		
 		public function bgMusic():void
 		{
 			FlxG.play(playSong, 0.4, true);

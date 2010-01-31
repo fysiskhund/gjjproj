@@ -12,9 +12,7 @@ package se.GGJgame
 		[Embed(source = "../../../resources/GUIpoo.png")] public static var ImgPoo:Class;
 		[Embed(source = "../../../resources/hats.png")] public static var ImgHat:Class;
 		protected var titleImage:Class;
-		private var king:Monkey;
-		private var text1:FlxText;
-		private var text2:FlxText;
+		
 		public var inGame:Boolean;
 		
 		
@@ -24,11 +22,11 @@ package se.GGJgame
 			inGame = false;
 			FlxState.bgColor = 0xff262626;
 			
-			text1 = new FlxText( 10, 10, FlxG.width, "Instructions" );
+			var text1:FlxText = new FlxText( 10, 10, FlxG.width, "Instructions" );
 			text1.setFormat( null, 16, 0xFFFFFFFF, "left" );
 			this.add( text1 );
 			
-			text2 = new FlxText( 20, 35, FlxG.width, "1. Steer with [ARROW KEYS].\n\n" +
+			var text2:FlxText = new FlxText( 20, 35, FlxG.width, "1. Steer with [ARROW KEYS].\n\n" +
 													 "2. Pick up       with [CTRL] to produce         .\n\n" +
 													 "3. Pick up any of                    with [CTRL] to disguse as a tribe member.\n\n" +
 													 "4. Throw         with [SPACE] at another monkey to cause a conflict\n     between the two tribes.\n\n" +
@@ -45,7 +43,7 @@ package se.GGJgame
 			text4.setFormat( null, 8, 0xFFCCCCCC, "left" );
 			this.add( text4 );
 			
-			king = new Monkey(215,126,null);
+			var king:Monkey = new Monkey(215,126,null);
 			king.team = 9;
 			this.add(king);
 			this.add(king._hatSprite);
@@ -85,7 +83,7 @@ package se.GGJgame
 		override public function update():void 
 		{		   
 			super.update();
-			king.update();
+			//king.update();
 			if (FlxG.keys.justReleased("ENTER"))
 			{
 				FlxG.switchState(GameState);
