@@ -49,7 +49,7 @@ package se.GGJgame
 				conflictTime = conflictTimeLong;
 			}
 			
-			if(team0 == team1)
+			if(team0 == team1 || team0 == 5 || team1 == 5)
 				return;
 			
 			// Prevent from extending time by repeatedly pestering someone
