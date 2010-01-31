@@ -13,7 +13,7 @@ package se.GGJgame
 		public var npcs:Array;
 		public var ninjaNpcs:Array;
 		public var sfx:Sfx;
-		private var king:Npc;
+		public var king:Npc;
 		private var cameraTarget:Npc;
 		public var items:Array;
 		public var text:FlxText;
@@ -218,7 +218,7 @@ package se.GGJgame
 				_map.collide( player1 );
 				_map.collideArray(npcs);
 				_map.collide(_poo_p1);
-				player1.collideArray(ninjaNpcs);
+				//player1.collideArray(ninjaNpcs);
 				
 				
 				FlxG.overlapArray(items, player1, player1.pickUp);

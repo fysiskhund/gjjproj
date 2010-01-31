@@ -42,7 +42,7 @@ package se.GGJgame
 				{
 					gs.win();
 				}
-				if(playerTeam != targetTeam && playerTeam > 0) {
+				if(playerTeam != targetTeam) {
 					gs.conflicts.setAtWar(playerTeam,targetTeam);
 					gs.conflicts.setAtWar(targetTeam,playerTeam);
 					gs.doCutScene();

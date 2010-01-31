@@ -7,6 +7,9 @@ package se.GGJgame
 	public class NinjaNpc extends PreNpc
 	{
 		[Embed( source='../../../resources/monkey_ninja.png' )] private var ImgNinja:Class;
+		[Embed( source='../../../resources/monkey_ninja_attack.png' )] private var ImgAttack:Class;
+		[Embed( source='../../../resources/fight_ninja.png' )] private var ImgFightNinja:Class;
+		
 		public var ignorePlayer:Boolean;
 		var gs:GameState = (FlxG.state as GameState);
 		
@@ -19,9 +22,11 @@ package se.GGJgame
 		override public function update():void 
 		{
 			
-			var d:Number = 10000;
+			var d:Number = 101;
 			var p:Monkey = null;
 			var d_o:Number = this.dist(this.x,this.y,_oPos.x,_oPos.y);
+			
+			
 			//Testing for enemy monkeys
 			for each (var monkey:Monkey in gs.ninjaNpcs)
 			{
@@ -38,30 +43,51 @@ package se.GGJgame
 				}
 				
 			}
-			if (p)
+			if (p && (dist(this.x, this.y, gs.king.x, gs.king.y) < 400))
 			{
-				
 				if (d < 10) {
-					loadGraphic(FightImg,true,false,19,19);
+					loadGraphic(ImgFightNinja,true,false,19,19);
 				} else if (d < 100) {
 					// Stalk
 					this.velocity.x = p.x - this.x;
 					this.velocity.y = p.y - this.y;
 					this.velocity.normalize(_move_speed);
 				}
-				else if (d_o < 1) {
+				
+			}  else if (d_o < 1) {
 					this.velocity = new Point(0,0);
 					
-				} else
+			} else
+			{
+				var dir:Point = new Point(_oPos.x - this.x, _oPos.y - this.y);
+				dir.normalize(_move_speed);
+				this.velocity = dir;
+			}
+			
+			if (!p)
+			{
+				p = gs.player1;
+				d = this.dist(this.x, this.y, p.x, p.y);
+				if ((d < 30) && (d >11))
 				{
-					var dir:Point = new Point(_oPos.x - this.x, _oPos.y - this.y);
-					dir.normalize(_move_speed);
-					this.velocity = dir;
+					loadGraphic(ImgAttack, true, false,14,12);
+					if (d < 20)
+					{
+							
+						this.velocity.x = p.x - this.x;
+						this.velocity.y = p.y - this.y;
+						this.velocity.normalize(_move_speed);
+					}
+				} else if (d < 10)
+				{
+					gs.die();
+				} else 
+				{
+					loadGraphic(ImgNinja, true, false,14,12);
 				}
-				
 			}
 			super.update();
-			
+		
 		}
 		
 	}

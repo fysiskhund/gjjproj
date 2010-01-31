@@ -6,8 +6,8 @@ package se.GGJgame
 
 	public class Monkey extends FlxSprite
 	{
-		[Embed( source='../../../resources/monkey.png' )] private var ImgMonkey:Class;
-		[Embed( source='../../../resources/hats.png' )] private var ImgHats:Class;
+		[Embed( source='../../../resources/monkey.png' )] protected var ImgMonkey:Class;
+		[Embed( source='../../../resources/hats.png' )] protected var ImgHats:Class;
 		
 		public var _hatSprite:FlxSprite;
 		public var team:int;
