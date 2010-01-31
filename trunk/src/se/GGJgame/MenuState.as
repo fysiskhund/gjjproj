@@ -41,10 +41,17 @@ package se.GGJgame
 			
 			var text:FlxText = new FlxText( 0, (FlxG.height / 2) - 40, FlxG.width, "Primate Diplomat!" );
 			text.setFormat( null, 32, 0xFFFFFFFF, "center" );
-			var text2:FlxText = new FlxText( text.x, text.y + 45, FlxG.width, "Press Enter to play" );
-			text2.setFormat( null, 8, 0xFFFFFFFF, "center" );
+			var text1:FlxText = new FlxText( text.x, text.y +65, FlxG.width, "A game by\nMarcus Antonsson, Andreas Karlsson and Alejandro Valenzuela" );
+			text1.setFormat( null, 8, 0xFFFFFFFF, "center" );
+			var text2:FlxText = new FlxText( text.x, text.y + 100, FlxG.width, "Press Enter to play" );
+			text2.setFormat( null, 12, 0xFFFFFFFF, "center" );
+			
+			var text3:FlxText = new FlxText( text.x, text.y + 150, FlxG.width, "Global Game Jam 2010 - Chalmers/GU" );
+			text3.setFormat( null, 8, 0xFFFFFFFF, "center" );
 			this.add( text );
+			this.add( text1);
 			this.add( text2);
+			this.add( text3);
 		}
 		
 		//updates to be done in MenuState
