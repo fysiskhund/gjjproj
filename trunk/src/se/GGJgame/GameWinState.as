@@ -56,7 +56,7 @@ package se.GGJgame
 			super.update();
 			if (FlxG.keys.ENTER)
 			{
-				FlxG.switchState(GameState);
+				FlxG.switchState(InstructionsState);
 			}
 		}
 		
