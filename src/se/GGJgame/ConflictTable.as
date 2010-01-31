@@ -13,8 +13,8 @@ package se.GGJgame
 		private var _numTeams:int;
 		
 		// The amount of time a conflict will rage on (in seconds)
-		private var conflictTimeShort:Number = 25;
-		private var conflictTimeLong:Number = 10;
+		private var conflictTimeShort:Number = 10;
+		private var conflictTimeLong:Number = 25;
 		private var _gs:GameState = (FlxG.state as GameState);
 		
 		public function ConflictTable(numTeams:int=5)
