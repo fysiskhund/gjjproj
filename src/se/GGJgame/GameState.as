@@ -52,7 +52,10 @@ package se.GGJgame
 		private var _guiBananaSprite:FlxSprite;
 		private var _guiMain:FlxSprite;
 		private var _coolingDown:Boolean;
+		private var _guiConflictPositions:Array;
 		private var _maplist:Array;
+		private var _oldConflicts:Array;
+		private var _guiConflicts:Array;
 
 
 		//Just preparing for an eventual second player
@@ -359,6 +362,43 @@ package se.GGJgame
 				_guiPooSprite.play( "not ready" );
 			}
 			this._guiText.text = "x" + (player1.bananas).toString();
+			
+			//for conflicts in gui
+			//HACK HACK HACK, the structure is properly fucked!
+			for ( var i:int = 0; i < 5; i++ ) {
+	        	for ( var j:int = 0; j < 5; j++ ) {
+	        		if ( conflicts.ct[i][j] > 0 ) {
+	        			if ( _oldConflicts[i][j] == false ) {
+	        				var maxTime:int = _oldConflicts[i][j] 
+	        				var k:int;
+	        				var newConflict:ConflictBar = new ConflictBar();
+	        				for ( k = 0; k < _guiConflictPositions.length; k++ ) {
+	        					if ( _guiConflictPositions[k] ) {
+	        						newConflict.position = k;
+	        						_guiConflictPositions[k] = false;	        						
+	        						break;
+	        					}
+	        				}
+	        				newConflict.addConflict( i, j, conflicts.ct[i][j], k * 40 + 4 );
+	        				
+	        				//newConflict.offsetX( k * 40 );
+	        				_lyrGUI.add( newConflict )
+	        				_oldConflicts[i][j] = newConflict;
+	        				_oldConflicts[j][i] = newConflict;
+
+	        			} else {
+	        				var conflict:ConflictBar = _oldConflicts[i][j];
+	        				conflict.setValue( conflicts.ct[i][j] );
+	        			}
+	        		} else if ( _oldConflicts[i][j] != false ) {
+	        				var oldConflict:ConflictBar = _oldConflicts[i][j];
+	        				_guiConflictPositions[ oldConflict.position ] = true;
+	        				oldConflict.destroy();
+	        				_oldConflicts[i][j] = false; 
+	        		}
+	        	}
+	        }
+			
 		}
 		
 		public function setupGUI():void
@@ -368,6 +408,7 @@ package se.GGJgame
 	        _guiPooSprite = new FlxSprite();
 	        _guiMain = new FlxSprite();
 	        _guiBananaSprite = new FlxSprite();
+	        _guiConflicts = new Array();
 	        
 	        _guiText = new FlxText( 20, FlxG.height - 20, 50, "x" + (player1.bananas).toString() );
 			_guiText.setFormat( null, 16, 0x00000000, "left" );
@@ -392,6 +433,16 @@ package se.GGJgame
 	        _guiBananaSprite.scrollFactor.y = 0;
 	        _guiText.scrollFactor.x = 0;
 	        _guiText.scrollFactor.y = 0;
+	        
+	        _oldConflicts = new Array( teams );
+			
+			var teams:int = 5;
+			for ( var i:int = 0; i < teams; i++ ) {
+				_oldConflicts[i] = new Array( teams );
+				for ( var j:int = 0; j < teams; j++ ) {
+					_oldConflicts[i][j] = false;
+				}
+			}
 	        	        	       
 	        _guiPooSprite.loadGraphic( pooCount, true, false, 20, 20 );
    			//_guiPooSprite.addAnimation( "cooldown",[0, 1, 2, 3, 4, 5], 3);
@@ -411,8 +462,11 @@ package se.GGJgame
    			_guiBananaSprite.loadGraphic( GUIbanana, false, false, 20, 20 );
    			
    			_guiMain.loadGraphic( GUIbg, false, false, 100, 20 );
-   			
-   			
+
+			_guiConflictPositions = new Array(6);
+			for ( var k:int = 0; k < 6; k++ ) {
+				_guiConflictPositions[k] = true;   			
+			}
    			_lyrGUI.add( _guiMain );
    			_lyrGUI.add( _guiPooSprite );
    			_lyrGUI.add( _guiBananaSprite );

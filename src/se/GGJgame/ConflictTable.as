@@ -27,11 +27,9 @@ package se.GGJgame
 				ct[i] = new Array(numTeams);
 				for (var j:int = 0; j < numTeams; j++)
 				{
-					ct[i][j] = -1;
-					
+					ct[i][j] = -1;		
 				}
-			}
-			
+			}			
 		}
 		public function setAtWar(team0:int, team1:int):void
 		{
