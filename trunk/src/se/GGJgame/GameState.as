@@ -45,7 +45,7 @@ package se.GGJgame
 		private var _coolingDown:Boolean;
 
 		//Sound resource
-		[Embed(source = "../../../resources/playMusic.mp3")] public static var playSong:Class;
+		//[Embed(source = "../../../resources/playMusic.mp3")] public static var playSong:Class;
 
 		//Just preparing for an eventual second player
 		private var _player2:Player;
@@ -124,14 +124,14 @@ package se.GGJgame
 					else if(nr >= 7 && nr <= 9)
 					{//BRP
 						// Add the king's guards (blue, red, purple)
-						var nj:Npc = new NinjaNpc(x*16,y*16,null, nr-6);
+						var nj:NinjaNpc = new NinjaNpc(x*16,y*16,null, nr-6);
 						_lyrSprites.add(nj);
 						ninjaNpcs.push(nj);
 						_lyrSprites.add(nj._hatSprite);
 					} else if (nr == 28) 
 					{// T
 						// Last of the king's guards (Triangle)
-						var nj:Npc = new NinjaNpc(x*16,y*16,null, 4);
+						var nj:NinjaNpc = new NinjaNpc(x*16,y*16,null, 4);
 						_lyrSprites.add(nj);
 						ninjaNpcs.push(nj);
 						_lyrSprites.add(nj._hatSprite);
@@ -159,7 +159,7 @@ package se.GGJgame
 			
 			FlxG.follow( player1 );
 			
-			FlxG.play( playSong, 0.5, true ); 
+			//FlxG.play( playSong, 0.5, true ); 
 			
 			//FlxG.followAdjust( 2, 2 );
 			//FlxG.followBounds( 2, 2, 2, 2 );
