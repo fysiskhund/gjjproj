@@ -11,6 +11,7 @@ package se.GGJgame
 		public var player1:Player;
 		public var npcs:Array;
 		public var ninjaNpcs:Array;
+		public var sfx:Sfx;
 		private var king:Npc;
 		private var cameraTarget:Npc;
 		public var items:Array;
@@ -19,6 +20,7 @@ package se.GGJgame
 		private var _map:FlxTilemap;
 		private var _BGmap:FlxTilemap;
 		private var _leftInCutscene:Number;
+		private var _doneCutscene:Boolean;
 		
 		public var conflicts:ConflictTable;
 		
@@ -44,16 +46,17 @@ package se.GGJgame
 		private var _guiMain:FlxSprite;
 		private var _coolingDown:Boolean;
 
-		//Sound resource
-		//[Embed(source = "../../../resources/playMusic.mp3")] public static var playSong:Class;
 
 		//Just preparing for an eventual second player
 		private var _player2:Player;
 		public function GameState()
 		{
-			super();			
+			super();
+			
+			sfx = new Sfx();			
 			
 			_leftInCutscene = Number.NEGATIVE_INFINITY;
+			_doneCutscene = false;
 			FlxState.bgColor = 0xff107100;
 			cameraTarget = new Npc();
 			cameraTarget.visible = true;
@@ -129,7 +132,7 @@ package se.GGJgame
 						ninjaNpcs.push(nj);
 						_lyrSprites.add(nj._hatSprite);
 					} else if (nr == 28) 
-					{// T
+					{
 						// Last of the king's guards (Triangle)
 						var nj:NinjaNpc = new NinjaNpc(x*16,y*16,null, 4);
 						_lyrSprites.add(nj);
@@ -159,7 +162,7 @@ package se.GGJgame
 			
 			FlxG.follow( player1 );
 			
-			//FlxG.play( playSong, 0.5, true ); 
+			sfx.bgMusic();
 			
 			//FlxG.followAdjust( 2, 2 );
 			//FlxG.followBounds( 2, 2, 2, 2 );
@@ -188,7 +191,10 @@ package se.GGJgame
 		}
 		
 		public function doCutScene():void {
+			if(_doneCutscene)
+				return;
 			_leftInCutscene = 10;
+			//_doneCutscene = true;
 			cameraTarget.x = player1.x;
 			cameraTarget.y = player1.y;
 		}
@@ -200,7 +206,8 @@ package se.GGJgame
 		override public function update():void 
 		{
 
-			if(_leftInCutscene == Number.NEGATIVE_INFINITY) {				
+			if(_leftInCutscene == Number.NEGATIVE_INFINITY) {
+					
 				guiUpdate();
 				//text.text = lives.toString();
 				
