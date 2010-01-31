@@ -274,6 +274,15 @@ package se.GGJgame
 					cameraTarget.x =  player1.x;
 					cameraTarget.y =  player1.y;
 					var left:String = _leftInCutscene.toString().substr(0,1);
+					if(left == "3")
+						sfx.count3();
+					else if(left == "2")
+						sfx.count2();
+					else if(left == "1")
+						sfx.count1();
+					else if(left == "0")
+						sfx.countGo();
+					
 					if(left == "0")
 						text.text = "Go!";
 					else
