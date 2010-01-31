@@ -20,8 +20,13 @@ package se.GGJgame
 		public function GameWinState()
 		{
 			super();
+			
+			// Reset level data - allows the player to play the game again
+			FlxG.level = 0;
+			
 			inGame = false;
 			FlxState.bgColor = 0xff107100;
+			
 			
 			var sfx:Sfx = new Sfx();
 			sfx.win();
