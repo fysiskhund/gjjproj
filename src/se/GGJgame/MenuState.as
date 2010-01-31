@@ -17,7 +17,7 @@ package se.GGJgame
 		{
 			super();
 			player1 = new Player();
-			FlxState.bgColor = 0xff000000
+			FlxState.bgColor = 0xff262626;
 				
 			var e:FlxEmitter = new FlxEmitter();
 			e.width = FlxG.width;
@@ -51,7 +51,7 @@ package se.GGJgame
 			super.update();
 			if (FlxG.keys.ENTER)
 			{
-				FlxG.switchState(GameState);
+				FlxG.switchState(InstructionsState);
 			}
 		}		
 	}
