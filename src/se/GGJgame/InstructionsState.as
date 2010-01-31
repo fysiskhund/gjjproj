@@ -86,7 +86,7 @@ package se.GGJgame
 		{		   
 			super.update();
 			king.update();
-			if (FlxG.keys.ENTER)
+			if (FlxG.keys.justReleased("ENTER"))
 			{
 				FlxG.switchState(GameState);
 			}

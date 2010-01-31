@@ -46,7 +46,7 @@ package se.GGJgame
 		override public function update():void 
 		{
 			super.update();
-			if (FlxG.keys.ENTER)
+			if (FlxG.keys.justReleased("ENTER"))
 			{
 				FlxG.switchState(InstructionsState);
 			}
