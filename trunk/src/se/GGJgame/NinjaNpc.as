@@ -68,7 +68,11 @@ package se.GGJgame
 			{
 				p = gs.player1;
 				d = this.dist(this.x, this.y, p.x, p.y);
-				if ((d < 30) && (d >11))
+				
+				if (d < 10)
+				{
+					gs.die();
+				} else if (d < 30)
 				{
 					loadGraphic(ImgAttack, true, false,14,12);
 					if (d < 20)
@@ -78,9 +82,6 @@ package se.GGJgame
 						this.velocity.y = p.y - this.y;
 						this.velocity.normalize(_move_speed);
 					}
-				} else if (d < 10)
-				{
-					gs.die();
 				} else 
 				{
 					loadGraphic(ImgNinja, true, false,14,12);
