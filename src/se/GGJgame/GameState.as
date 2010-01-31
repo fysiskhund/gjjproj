@@ -44,9 +44,11 @@ package se.GGJgame
 		private var _guiMain:FlxSprite;
 		private var _coolingDown:Boolean;
 
+		//Sound resource
+		[Embed(source = "../../../resources/playMusic.mp3")] public static var playSong:Class;
+
 		//Just preparing for an eventual second player
 		private var _player2:Player;
-		
 		public function GameState()
 		{
 			super();			
@@ -156,6 +158,8 @@ package se.GGJgame
 			_poo_p1 = new Poo();
 			
 			FlxG.follow( player1 );
+			
+			FlxG.play( playSong, 0.5, true ); 
 			
 			//FlxG.followAdjust( 2, 2 );
 			//FlxG.followBounds( 2, 2, 2, 2 );
