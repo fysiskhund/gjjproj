@@ -37,6 +37,7 @@ package se.GGJgame
 				var gs:GameState = (FlxG.state as GameState);
 				var playerTeam:int = gs.player1.team;
 				var targetTeam:int = n.team;
+				gs.sfx.pooHit();
 				if(targetTeam == 9)
 				{
 					gs.win();
@@ -46,6 +47,7 @@ package se.GGJgame
 					gs.conflicts.setAtWar(targetTeam,playerTeam);
 					gs.doCutScene();
 				}
+				
 			}
 			
 		}
