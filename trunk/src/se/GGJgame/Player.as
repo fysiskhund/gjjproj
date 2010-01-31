@@ -88,6 +88,8 @@ package se.GGJgame
 					bananas--;
 					poo++;
 					_timeToPoo = Number.POSITIVE_INFINITY;
+					var sfx:Sfx = new Sfx();
+					sfx.pooReady();
 				}
 				else 
 				{

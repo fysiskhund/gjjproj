@@ -16,6 +16,7 @@ package se.GGJgame
 		[Embed(source = "../../../resources/dink_c.mp3")] public static var dinkCFx:Class;
 		[Embed(source = "../../../resources/throw.mp3")] public static var throwFx:Class;
 		[Embed(source = "../../../resources/squash2.mp3")] public static var squashFx:Class;
+		[Embed(source = "../../../resources/fly.mp3")] public static var flyFx:Class;
 		
 		public function Sfx()
 		{
@@ -59,6 +60,11 @@ package se.GGJgame
 		public function pooHit():void
 		{
 			FlxG.play(squashFx, 1, false);
+		}
+		
+		public function pooReady():void
+		{
+			FlxG.play(flyFx, 1, false);
 		}
 		
 	}

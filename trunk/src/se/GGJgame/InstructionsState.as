@@ -32,7 +32,7 @@ package se.GGJgame
 													 "2. Pick up       with [CTRL] to produce         .\n\n" +
 													 "3. Pick up any of                    with [CTRL] to disguse as a tribe member.\n\n" +
 													 "4. Throw         with [SPACE] at another monkey to cause a conflict\n     between the two tribes.\n\n" +
-													 "5. Cause enough conflict to expose the       to attack." );
+													 "5. Cause enough conflict to expose the       to         attack." );
 			text2.setFormat( null, 8, 0xFFCCCCCC, "left" );
 			this.add( text2 );
 			
@@ -63,6 +63,11 @@ package se.GGJgame
 			poo2.loadGraphic(ImgPoo,true);
 			poo2.specificFrame(6);
 			this.add(poo2);
+			
+			var poo3:FlxSprite = new FlxSprite(246,118);
+			poo3.loadGraphic(ImgPoo,true);
+			poo3.specificFrame(6);
+			this.add(poo3);
 			
 			var hat1:FlxSprite = new FlxSprite(90,76);
 			hat1.loadGraphic(ImgHat,true,false,71,9);
