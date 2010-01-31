@@ -9,7 +9,7 @@ package se.GGJgame
 		[Embed( source='../../../resources/monkey.png' )] private var ImgMonkey:Class;
 		[Embed( source='../../../resources/monkey_ninja.png' )] private var ImgNinja:Class;
 		
-		private var _ct:Array;
+		public var ct:Array;
 		private var _numTeams:int;
 		
 		// The amount of time a conflict will rage on (in seconds)
@@ -19,15 +19,15 @@ package se.GGJgame
 		
 		public function ConflictTable(numTeams:int=5)
 		{
-			_ct = new Array(numTeams);
+			ct = new Array(numTeams);
 			_numTeams = numTeams;
 			
 			for (var i:int=0; i<numTeams; i++)
 			{
-				_ct[i] = new Array(numTeams);
+				ct[i] = new Array(numTeams);
 				for (var j:int = 0; j < numTeams; j++)
 				{
-					_ct[i][j] = -1;
+					ct[i][j] = -1;
 					
 				}
 			}
@@ -53,9 +53,9 @@ package se.GGJgame
 			}
 
 			// Prevent from extending time by repeatedly pestering someone
-			if (_ct[team0][team1] < 0) 
+			if (ct[team0][team1] < 0) 
 			{
-				_ct[team0][team1] = conflictTime;
+				ct[team0][team1] = conflictTime;
 			}
 		}
 		public function getAtWar(team0:int, team1:int):Boolean
@@ -67,7 +67,7 @@ package se.GGJgame
 			if(team1 > 4)
 				team1 -= 4;
 				
-			return (_ct[team0][team1] > 0);
+			return (ct[team0][team1] > 0);
 		}
 		public function update():void
 		{
@@ -75,13 +75,13 @@ package se.GGJgame
 			{
 				for (var j:int = 0; j < _numTeams; j++)
 				{
-					if (_ct[i][j] > 0)
+					if (ct[i][j] > 0)
 					{
-						_ct[i][j] -= FlxG.elapsed;
+						ct[i][j] -= FlxG.elapsed;
 						
 						// Restore guards' sprites once conflict is over
 						// in case they were fighting..
-						if (_ct[i][j] < 0)
+						if (ct[i][j] < 0)
 						{
 							for each (var monkey:Monkey in _gs.npcs)
 							{
