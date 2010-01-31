@@ -2,11 +2,11 @@ package se.GGJgame
 {
 
 	
-	import org.flixel.FlxSprite;
 	import org.flixel.*;
 
 	public class Sfx
 	{
+		private var _countStage:int;
 		[Embed(source = "../../../resources/playMusic.mp3")] public static var playSong:Class;
 		[Embed(source = "../../../resources/lose.mp3")] public static var loseFx:Class;
 		[Embed(source = "../../../resources/win.mp3")] public static var winFx:Class;
@@ -17,9 +17,12 @@ package se.GGJgame
 		[Embed(source = "../../../resources/throw.mp3")] public static var throwFx:Class;
 		[Embed(source = "../../../resources/squash2.mp3")] public static var squashFx:Class;
 		[Embed(source = "../../../resources/fly.mp3")] public static var flyFx:Class;
+		[Embed(source = "../../../resources/beep.mp3")] public static var beepFx:Class;
+		[Embed(source = "../../../resources/boop.mp3")] public static var boopFx:Class;
 		
 		public function Sfx()
 		{
+			_countStage = 3;
 			
 			
 		}
@@ -65,6 +68,35 @@ package se.GGJgame
 		public function pooReady():void
 		{
 			FlxG.play(flyFx, 1, false);
+		}
+		public function count3():void
+		{
+			if(_countStage < 3)
+				return;
+			_countStage--;
+			FlxG.play(beepFx, 1, false);
+			
+		}
+		public function count2():void
+		{
+			if(_countStage < 2)
+				return;
+			_countStage--;
+			FlxG.play(beepFx, 1, false);
+		}
+		public function count1():void
+		{
+			if(_countStage < 1)
+				return;
+			_countStage--;
+			FlxG.play(beepFx, 1, false);
+		}
+		public function countGo():void
+		{
+			if(_countStage < 0 || _countStage > 1)
+				return;
+			_countStage = 3;
+			FlxG.play(boopFx, 1, false);
 		}
 		
 	}
