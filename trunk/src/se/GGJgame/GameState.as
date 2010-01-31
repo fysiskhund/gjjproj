@@ -191,12 +191,14 @@ package se.GGJgame
 		}
 		
 		public function doCutScene():void {
+			sfx.chatter();
 			if(_doneCutscene)
 				return;
 			_leftInCutscene = 10;
 			//_doneCutscene = true;
 			cameraTarget.x = player1.x;
 			cameraTarget.y = player1.y;
+			
 		}
 		public function endCutScene():void {
 			_leftInCutscene = Number.NEGATIVE_INFINITY;
@@ -230,6 +232,7 @@ package se.GGJgame
 						_poo_p1.visible = true;
 						_poo_p1.throwPoo(player1.x, player1.y,  player1.dirX, player1.dirY);
 						player1.poo--;
+						sfx.throwPoo();
 					}
 				
 				}

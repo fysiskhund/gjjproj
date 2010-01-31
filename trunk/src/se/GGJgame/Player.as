@@ -38,16 +38,18 @@ package se.GGJgame
 	        	_lastPickup = new Date();
         		
         		if(item.visible) {
+        			var gs:GameState = (FlxG.state as GameState);
 	        		
 	        		if(item.type == 0) {
 	        			if(item.visible)
 	        			{
-	        				var gs:GameState = (FlxG.state as GameState);
+	        				
 	        				for each (var it:Item in gs.items) {
 	        					if(it.type == 0)
 									it.visible = true;
 							}
 		        			bananas++;
+		        			gs.sfx.bite();
 		        			item.visible = false;
 	        			}
 	        		}
@@ -58,6 +60,9 @@ package se.GGJgame
 	        				item.type = team;
 	        			else
 	        				item.visible = false;
+	        				
+	        				gs.sfx.swapHats();
+	        				
 	        			
 	        			team = newHat;
 	        			
