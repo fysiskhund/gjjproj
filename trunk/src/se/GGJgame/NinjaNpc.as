@@ -10,7 +10,7 @@ package se.GGJgame
 		[Embed( source='../../../resources/monkey_ninja_attack.png' )] private var ImgAttack:Class;
 		[Embed( source='../../../resources/fight_ninja.png' )] private var ImgFightNinja:Class;
 		
-		public var ignorePlayer:Boolean;
+		public var ignorePlayer:Boolean=false;
 		var gs:GameState = (FlxG.state as GameState);
 		
 		
@@ -64,6 +64,7 @@ package se.GGJgame
 				this.velocity = dir;
 			}
 			
+			
 			if (!p)
 			{
 				p = gs.player1;
@@ -85,6 +86,19 @@ package se.GGJgame
 				} else 
 				{
 					loadGraphic(ImgNinja, true, false,14,12);
+				}
+			}
+			
+			// At any time unless player is ignored
+			// you cross their path, you DIE!
+			if (!ignorePlayer)
+			{
+				p = gs.player1;
+				d = this.dist(this.x, this.y, p.x, p.y);
+				
+				if (d < 10)
+				{
+					gs.die();
 				}
 			}
 			super.update();

@@ -8,6 +8,7 @@ package se.GGJgame
 
 	public class GameState extends FlxState
 	{
+		
 		public var inGame:Boolean;
 		public var player1:Player;
 		public var npcs:Array;
@@ -36,7 +37,11 @@ package se.GGJgame
         private var _lyrGUI:FlxLayer;
 
 		[Embed(source = "../../../resources/tiles.png")] public static var mapTiles:Class;
-		[Embed(source = "../../../resources/level0.txt", mimeType = "application/octet-stream")] public static var mapData:Class;		
+		[Embed(source = "../../../resources/level0.txt", mimeType = "application/octet-stream")] public static var map0:Class;		
+		[Embed(source = "../../../resources/level1.txt", mimeType = "application/octet-stream")] public static var map1:Class;		
+		[Embed(source = "../../../resources/level2.txt", mimeType = "application/octet-stream")] public static var map2:Class;		
+
+		
 		
 		//GUI resource 
 		[Embed(source = "../../../resources/GUIpoo.png")] public static var pooCount:Class;
@@ -47,10 +52,11 @@ package se.GGJgame
 		private var _guiBananaSprite:FlxSprite;
 		private var _guiMain:FlxSprite;
 		private var _coolingDown:Boolean;
+		private var _maplist:Array;
 
 
 		//Just preparing for an eventual second player
-		private var _player2:Player;
+		//private var _player2:Player;
 		public function GameState()
 		{
 			super();
@@ -78,8 +84,11 @@ package se.GGJgame
 			
 			_lyrGUI.add(text);
 			
+			// Map loading
+			_maplist = new Array(map0, map1, map2);
+			
 			_map = new FlxTilemap();
-			_map.loadMap( new mapData, mapTiles);
+			_map.loadMap( new _maplist[FlxG.level], mapTiles);
 			_map.collideIndex = 30;
 			_map.follow();
 			_map.x = 0;
@@ -179,7 +188,7 @@ package se.GGJgame
 			
 
 			_lyrSprites.add( player1 );
-			this.add( player1._hatSprite);
+			
 
 			//camera tweaks 
 			_poo_p1 = new Poo();
@@ -197,6 +206,7 @@ package se.GGJgame
             this.add(_lyrGUI);
 
 			this.add( _poo_p1);
+			this.add( player1._hatSprite);
 			
 			
 		}
@@ -211,7 +221,16 @@ package se.GGJgame
 				FlxG.switchState(GameOverState);
 		}
 		public function win():void {
-			FlxG.switchState(GameWinState);
+			
+			// Switch to next level
+			FlxG.level++;
+			if (FlxG.level < _maplist.length)
+			{
+				FlxG.switchState(GameState);
+			} else
+			{
+				FlxG.switchState(GameWinState);
+			}
 		}
 		
 		public function doCutScene():void {
