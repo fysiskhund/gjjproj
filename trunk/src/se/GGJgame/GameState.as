@@ -279,15 +279,7 @@ package se.GGJgame
 					}
 				
 				}
-				if (FlxG.keys.ONE)
-				{
-					player1.team++;
-				}
-				if (FlxG.keys.TWO)
-				{
-					conflicts.setAtWar(3,2);
-					conflicts.setAtWar(2,3);
-				}
+				
 				_poo_p1.update();
 				
 				for each (var np:Npc in npcs) {

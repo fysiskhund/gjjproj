@@ -103,7 +103,7 @@ package se.GGJgame
 			
 			var text2:FlxText = new FlxText( 20, 35, FlxG.width, "1. Steer with [ARROW KEYS].\n\n" +
 													 "2. Pick up       with [CTRL] to produce         .\n\n" +
-													 "3. Pick up any of                    with [CTRL] to disguse as a tribe member.\n\n" +
+													 "3. Pick up any of                    with [CTRL] to disguise as a tribe member.\n\n" +
 													 "4. Throw         with [SPACE] at another monkey to cause a conflict\n     between the two tribes.\n\n" +
 													 "5. Cause enough conflict to expose the       to         attack." );
 			text2.setFormat( null, 8, 0xFFCCCCCC, "left" );
