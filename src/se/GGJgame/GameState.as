@@ -15,6 +15,7 @@ package se.GGJgame
 		public var sfx:Sfx;
 		public var king:Npc;
 		private var cameraTarget:Npc;
+		private var startPoint:Point;
 		public var items:Array;
 		public var text:FlxText;
 		public var lives:int;
@@ -35,7 +36,7 @@ package se.GGJgame
         private var _lyrGUI:FlxLayer;
 
 		[Embed(source = "../../../resources/tiles.png")] public static var mapTiles:Class;
-		[Embed(source = "../../../resources/example_map.txt", mimeType = "application/octet-stream")] public static var mapData:Class;		
+		[Embed(source = "../../../resources/level0.txt", mimeType = "application/octet-stream")] public static var mapData:Class;		
 		
 		//GUI resource 
 		[Embed(source = "../../../resources/GUIpoo.png")] public static var pooCount:Class;
@@ -59,9 +60,8 @@ package se.GGJgame
 			_leftInCutscene = Number.NEGATIVE_INFINITY;
 			_doneCutscene = false;
 			FlxState.bgColor = 0xff107100;
-			cameraTarget = new Npc();
-			cameraTarget.visible = true;
-			player1 = new Player(250,50);
+			
+			
 			npcs = new Array();
 			ninjaNpcs = new Array();
 			items = new Array();
@@ -69,7 +69,7 @@ package se.GGJgame
 	        _lyrSprites = new FlxLayer;
     	    
     	    _lyrGUI = new FlxLayer;
-	        this.setupGUI();
+	        
     	    
     	    this.text = new FlxText( 0, FlxG.height/2-32, FlxG.width, "" );
     	    this.text.visible = false;
@@ -85,6 +85,26 @@ package se.GGJgame
 			_map.x = 0;
 			_map.y = 0; 
 			_lyrStage.add( _map );
+			startPoint = new Point();
+		
+			for ( x=0; x < _map.widthInTiles; x++) 
+			{
+				for ( y=0; y < _map.heightInTiles; y++) 
+				{
+					var nr:int = _map.getTile(x,y);
+					if (nr == 29) //player
+					{
+						startPoint = new Point(x*16,y*16);
+					}
+				}	
+			}
+			player1 = new Player(startPoint.x,startPoint.y);
+			
+			
+			cameraTarget = new Npc();
+			cameraTarget.visible = false;
+			
+			this.setupGUI();
 			
 			
 			for ( x=0; x < _map.widthInTiles; x++) 
@@ -140,8 +160,10 @@ package se.GGJgame
 						ninjaNpcs.push(nj);
 						_lyrSprites.add(nj._hatSprite);
 					}
+					
 				}
 			}
+			
 			
 			lives = 1;
 			conflicts = new ConflictTable(5);
@@ -153,10 +175,11 @@ package se.GGJgame
 				_lyrSprites.add(np._hatSprite);
 			}
 		
-			player1 = new Player(400,750);
-			_lyrSprites.add( player1 );
-
 			
+			
+
+			_lyrSprites.add( player1 );
+			this.add( player1._hatSprite);
 
 			//camera tweaks 
 			_poo_p1 = new Poo();
@@ -174,7 +197,7 @@ package se.GGJgame
             this.add(_lyrGUI);
 
 			this.add( _poo_p1);
-			this.add( player1._hatSprite);
+			
 			
 		}
 		public function die():void {
@@ -182,8 +205,8 @@ package se.GGJgame
 			for each (var np:Npc in npcs) {
 				np.restart();
 			}
-			player1.x = 120;
-			player1.y = 120;
+			player1.x = startPoint.x;
+			player1.y = startPoint.y;
 			if(lives == 0)
 				FlxG.switchState(GameOverState);
 		}
