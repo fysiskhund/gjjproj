@@ -19,6 +19,7 @@ package se.GGJgame
 		[Embed(source = "../../../resources/fly.mp3")] public static var flyFx:Class;
 		[Embed(source = "../../../resources/beep.mp3")] public static var beepFx:Class;
 		[Embed(source = "../../../resources/boop.mp3")] public static var boopFx:Class;
+		[Embed(source = "../../../resources/bloop.mp3")] public static var bloopFx:Class;
 		
 		public function Sfx()
 		{
@@ -68,6 +69,10 @@ package se.GGJgame
 		public function pooReady():void
 		{
 			FlxG.play(flyFx, 1, false);
+		}
+		public function misFire():void
+		{
+			FlxG.play(bloopFx, 1, false);
 		}
 		public function count3():void
 		{
