@@ -85,6 +85,7 @@ package se.GGJgame
 					var dir:Point = new Point(_oPos.x - this.x, _oPos.y - this.y);
 					dir.normalize(_move_speed);
 					this.velocity = dir;
+					loadGraphic(ImgMonkey,true,false, 14, 12 );
 				}
 			}
 
