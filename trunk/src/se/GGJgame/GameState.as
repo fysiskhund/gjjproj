@@ -215,11 +215,11 @@ package se.GGJgame
 		}
 		public function die():void {
 			lives--;
-			for each (var np:Npc in npcs) {
-				np.restart();
-			}
-			player1.x = startPoint.x;
-			player1.y = startPoint.y;
+			//for each (var np:Npc in npcs) {
+			//	np.restart();
+			//}
+			//player1.x = startPoint.x;
+			//player1.y = startPoint.y;
 			if(lives == 0)
 				FlxG.switchState(GameOverState);
 		}
