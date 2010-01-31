@@ -20,6 +20,9 @@ package se.GGJgame
 			super();
 			FlxState.bgColor = 0xff440000;
 			
+			var sfx:Sfx = new Sfx();
+			sfx.lose();
+			
 			caught = new FlxSprite();
 			caught.loadGraphic(ImgCaught);
 			caught.x = (FlxG.width/2) - 7;

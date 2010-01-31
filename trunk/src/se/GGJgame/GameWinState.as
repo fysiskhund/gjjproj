@@ -20,6 +20,10 @@ package se.GGJgame
 		{
 			super();
 			FlxState.bgColor = 0xff107100;
+			
+			var sfx:Sfx = new Sfx();
+			sfx.win();
+			
 			text1 = new FlxText( 0, (FlxG.height / 2)-30, FlxG.width, "Game Won!" );
 			text1.setFormat( null, 16, 0xFFFFFFFF, "center" );
 			this.add( text1 );
