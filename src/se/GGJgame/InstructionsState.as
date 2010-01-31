@@ -15,11 +15,13 @@ package se.GGJgame
 		private var king:Monkey;
 		private var text1:FlxText;
 		private var text2:FlxText;
+		public var inGame:Boolean;
 		
 		
 		public function InstructionsState()
 		{
 			super();
+			inGame = false;
 			FlxState.bgColor = 0xff262626;
 			
 			text1 = new FlxText( 10, 10, FlxG.width, "Instructions" );
