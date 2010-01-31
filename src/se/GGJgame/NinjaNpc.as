@@ -4,12 +4,12 @@ package se.GGJgame
 	
 	import org.flixel.FlxG;
 	
-	public class NinjaNpc extends Npc
+	public class NinjaNpc extends PreNpc
 	{
 		[Embed( source='../../../resources/monkey_ninja.png' )] private var ImgNinja:Class;
 		public var ignorePlayer:Boolean;
 		var gs:GameState = (FlxG.state as GameState);
-		private var _move_speed:int = 94; // just a tweak
+		
 		
 		public function NinjaNpc(X:int=0, Y:int=0, SimpleGraphic:Class=null, monkeyTeam:int=0)
 		{
@@ -18,10 +18,10 @@ package se.GGJgame
 		}
 		override public function update():void 
 		{
-			var d_o:Number = this.dist(this.x,this.y,_oPos.x,_oPos.y);
+			
 			var d:Number = 10000;
 			var p:Monkey = null;
-			
+			var d_o:Number = this.dist(this.x,this.y,_oPos.x,_oPos.y);
 			//Testing for enemy monkeys
 			for each (var monkey:Monkey in gs.ninjaNpcs)
 			{
@@ -40,7 +40,10 @@ package se.GGJgame
 			}
 			if (p)
 			{
-				if (d < 100) {
+				
+				if (d < 10) {
+					loadGraphic(FightImg,true,false,19,19);
+				} else if (d < 100) {
 					// Stalk
 					this.velocity.x = p.x - this.x;
 					this.velocity.y = p.y - this.y;
@@ -55,6 +58,7 @@ package se.GGJgame
 					dir.normalize(_move_speed);
 					this.velocity = dir;
 				}
+				
 			}
 			super.update();
 			
