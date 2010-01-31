@@ -8,6 +8,7 @@ package se.GGJgame
 
 	public class GameState extends FlxState
 	{
+		public var inGame:Boolean;
 		public var player1:Player;
 		public var npcs:Array;
 		public var ninjaNpcs:Array;
@@ -52,7 +53,7 @@ package se.GGJgame
 		public function GameState()
 		{
 			super();
-			
+			inGame = true;
 			sfx = new Sfx();			
 			
 			_leftInCutscene = Number.NEGATIVE_INFINITY;

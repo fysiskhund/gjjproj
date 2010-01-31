@@ -14,11 +14,13 @@ package se.GGJgame
 		private var player1:Player;
 		private var text1:FlxText;
 		private var text2:FlxText;
+		public var inGame:Boolean;
 		
 		
 		public function GameWinState()
 		{
 			super();
+			inGame = false;
 			FlxState.bgColor = 0xff107100;
 			
 			var sfx:Sfx = new Sfx();

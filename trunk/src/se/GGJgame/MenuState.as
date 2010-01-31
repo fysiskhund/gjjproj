@@ -12,10 +12,12 @@ package se.GGJgame
 		private var player1:Player;
 		private var _fx:FlxSprite;
 		protected var titleImage:Class;
+		public var inGame:Boolean;
 		
 		public function MenuState()
 		{
 			super();
+			inGame = false;
 			player1 = new Player();
 			FlxState.bgColor = 0xff262626;
 				

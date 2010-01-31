@@ -16,6 +16,8 @@ package se.GGJgame
 		override public function update():void 
 		{
 			var gs:GameState = (FlxG.state as GameState);
+			if(!gs.inGame)
+				return;
 			var p:Monkey = gs.player1;
 			var d:Number;
 			var d_o:Number = this.dist(this.x,this.y,_oPos.x,_oPos.y);

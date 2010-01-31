@@ -13,11 +13,13 @@ package se.GGJgame
 		//[Embed( Source = "../mypath")]
 		[Embed(source = "../../../resources/caught.png")] public static var ImgCaught:Class;
 		private var caught:FlxSprite;
+		public var inGame:Boolean;
 		protected var titleImage:Class;
 		
 		public function GameOverState()
 		{
 			super();
+			inGame = false;
 			FlxState.bgColor = 0xff440000;
 			
 			var sfx:Sfx = new Sfx();
